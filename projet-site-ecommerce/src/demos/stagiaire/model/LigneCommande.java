@@ -1,12 +1,12 @@
 package demos.stagiaire.model;
 
-public class ligneCommande {
+public class LigneCommande {
 	private int id;
 	private int quantiteCommandee;
 	private Commande commande;
 	private Produit produit;
 
-	public ligneCommande(int id, int quantiteCommandee, Commande commande, Produit produit) {
+	public LigneCommande(int id, int quantiteCommandee, Commande commande, Produit produit) {
 		super();
 		this.id = id;
 		this.quantiteCommandee = quantiteCommandee;
@@ -14,7 +14,7 @@ public class ligneCommande {
 		this.produit = produit;
 	}
 
-	public ligneCommande() {
+	public LigneCommande() {
 	}
 
 	public int getId() {
