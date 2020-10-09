@@ -4,17 +4,18 @@ public class Adresse {
 	private int id;
 	private String nomRue;
 	private String codePostal;
+	private String ville;
 
-	public Adresse(int id, String nomRue, String codePostal) {
+	public Adresse(int id, String nomRue, String codePostal, String ville) {
 		super();
 		this.id = id;
 		this.nomRue = nomRue;
 		this.codePostal = codePostal;
+		this.ville = ville;
 	}
 
 	public Adresse() {
 		super();
-
 	}
 
 	public int getId() {
@@ -41,9 +42,17 @@ public class Adresse {
 		this.codePostal = codePostal;
 	}
 
-	@Override
-	public String toString() {
-		return "Adresse [id=" + id + ", nomRue=" + nomRue + ", codePostal=" + codePostal + "]";
+	public String getVille() {
+		return ville;
 	}
 
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	@Override
+	public String toString() {
+		return "Adresse [id=" + id + ", nomRue=" + nomRue + ", codePostal=" + codePostal + ", ville=" + ville + "]";
+	}
+	
 }

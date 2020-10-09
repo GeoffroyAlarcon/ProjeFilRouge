@@ -58,6 +58,24 @@ public class ServiceProduit {
 
 	}
 
+	public Produit findAll() {
+		for (int i = 0; i < tableauDeProduit.size(); i++) {
+		 return tableauDeProduit.get(i);
+		}
+	return null;
+	}
+
+	public Produit findAllDisponible() {
+		for (int i = 0; i < tableauDeProduit.size(); i++) {
+			Produit verifystock = tableauDeProduit.get(i);
+			if (verifystock.getQuantiteStock() >= 1) {
+				return tableauDeProduit.get(i);
+			}
+		}
+		return null;
+
+	}
+
 	@Override
 	public String toString() {
 		return "TableauDeProduit [tableauDeProduit=" + tableauDeProduit + "]";

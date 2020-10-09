@@ -5,9 +5,9 @@ import java.util.Date;
 public class Commande {
 	private int id;
 	private Date datescommande;
-	private Acheteur acheteur;
+	private Purchasser acheteur;
 
-	public Commande(int id, Date datescommande, Acheteur acheteur) {
+	public Commande(int id, Date datescommande, Purchasser acheteur) {
 		super();
 		this.id = id;
 		this.datescommande = datescommande;
@@ -35,11 +35,11 @@ public class Commande {
 		this.datescommande = datescommande;
 	}
 
-	public Acheteur getAcheteur() {
+	public Purchasser getAcheteur() {
 		return acheteur;
 	}
 
-	public void setAcheteur(Acheteur acheteur) {
+	public void setAcheteur(Purchasser acheteur) {
 		this.acheteur = acheteur;
 	}
 

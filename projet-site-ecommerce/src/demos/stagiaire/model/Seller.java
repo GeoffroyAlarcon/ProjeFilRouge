@@ -1,18 +1,17 @@
 package demos.stagiaire.model;
 
-public class Vendeur extends User {
+public class Seller extends User {
 	private String nomCompagnie;
 	private String siret;
 	private String description;
-
-	public Vendeur(int id, String email, String passeword, String nomCompagnie, String siret, String description) {
+	public Seller(int id, String email, String passeword, String nomCompagnie, String siret, String description) {
 		super(id, email, passeword);
 		this.nomCompagnie = nomCompagnie;
 		this.siret = siret;
 		this.description = description;
 	}
 
-	public Vendeur() {
+	public Seller() {
 		super();
 			}
 	public String getNomCompagnie() {

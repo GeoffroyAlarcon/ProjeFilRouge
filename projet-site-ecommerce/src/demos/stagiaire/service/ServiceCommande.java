@@ -59,10 +59,11 @@ public class ServiceCommande {
 
 	}
 
-	public void findAll() {
+	public LigneCommande findAll() {
 		for (int i = 0; i < tableauDeCommande.size(); i++) {
-			System.out.println(tableauDeCommande.get(i));
+			return tableauDeCommande.get(i);
 		}
+		return null;
 	}
 
 	@Override

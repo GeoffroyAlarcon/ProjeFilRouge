@@ -5,12 +5,12 @@ public class Produit {
 	private String designation;
 	private float prixUnitaire;
 	private int quantiteStock;
-	private Vendeur vendeur;
+	private Seller vendeur;
 	private String imageURL;
 	private String description;
 	private String caractéristique;
 
-	public Produit(int id, String designation, float prixUnitaire, int quantiteStock, Vendeur vendeur, String imageURL,
+	public Produit(int id, String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
 			String description, String caractéristique) {
 		super();
 		this.id = id;
@@ -59,11 +59,11 @@ public class Produit {
 		this.quantiteStock = quantiteStock;
 	}
 
-	public Vendeur getVendeur() {
+	public Seller getVendeur() {
 		return vendeur;
 	}
 
-	public void setProduit(Vendeur vendeur) {
+	public void setProduit(Seller vendeur) {
 		this.vendeur = vendeur;
 	}
 

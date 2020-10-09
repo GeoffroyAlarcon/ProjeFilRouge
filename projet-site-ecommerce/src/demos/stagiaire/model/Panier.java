@@ -3,9 +3,9 @@ package demos.stagiaire.model;
 public class Panier {
 	private int id;
 	private Produit produit;
-	private Acheteur acheteur;
+	private Purchasser acheteur;
 
-	public Panier(int id, Produit produit, Acheteur acheteur) {
+	public Panier(int id, Produit produit, Purchasser acheteur) {
 		super();
 		this.id = id;
 		this.produit = produit;
@@ -31,11 +31,11 @@ public class Panier {
 		this.produit = produit;
 	}
 
-	public Acheteur getAcheteur() {
+	public Purchasser getAcheteur() {
 		return acheteur;
 	}
 
-	public void setAcheteur(Acheteur acheteur) {
+	public void setAcheteur(Purchasser acheteur) {
 		this.acheteur = acheteur;
 	}
 	@Override

@@ -1,12 +1,12 @@
 package demos.stagiaire.model;
 
-public class Acheteur extends User {
+public class Purchasser extends User {
 	private String carteBancaire;
 	private String numeroTel;
 	private String identite;
 	private Adresse adresse;
 
-	public Acheteur(int id, String email, String passeword, String carteBancaire, String numeroTel, String identite,
+	public Purchasser(int id, String email, String passeword, String carteBancaire, String numeroTel, String identite,
 			Adresse adresse) {
 		super(id, email, passeword);
 		this.carteBancaire = carteBancaire;
@@ -15,7 +15,7 @@ public class Acheteur extends User {
 		this.adresse = adresse;
 	}
 
-	public Acheteur() {
+	public Purchasser() {
 		super();
 	}
 
@@ -54,7 +54,9 @@ public class Acheteur extends User {
 	@Override
 	public String toString() {
 		return "Acheteur [carteBancaire=" + carteBancaire + ", numeroTel=" + numeroTel + ", identite=" + identite
-				+ ", adresse=" + adresse + "]";
+				+ ", adresse=" + adresse + ", toString()=" + super.toString() + "]";
 	}
+
+
 
 }
