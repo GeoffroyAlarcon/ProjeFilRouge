@@ -123,12 +123,10 @@ public class ServiceUtilisateur {
 
 	}
 
-	public Seller findAllSeller() {
-		for (int i = 0; i < tableauDeVendeur.size(); i++) {
-			return tableauDeVendeur.get(i);
-		}
-		return null;
+	public ArrayList<Seller> findallSeller() {
+	return tableauDeVendeur;	
 	}
+
 
 	@Override
 	public String toString() {

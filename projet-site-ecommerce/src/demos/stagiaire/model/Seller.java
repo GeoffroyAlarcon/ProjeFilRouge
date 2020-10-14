@@ -40,9 +40,11 @@ public class Seller extends User {
 
 	@Override
 	public String toString() {
-		return "Vendeur [nomCompagnie=" + nomCompagnie + ", siret=" + siret + ", description=" + description + "]";
+		return "Seller [nomCompagnie=" + nomCompagnie + ", siret=" + siret + ", description=" + description
+				+ ", toString()=" + super.toString() + "]";
 	}
 
+	
 	
 
 }

@@ -4,14 +4,13 @@ public class LigneCommandePanierProduit {
 	private int id;
 	private int quantiteCommandee;
 	private Panier panier;
-	private Produit produit;
 
-	public LigneCommandePanierProduit(int id, int quantiteCommandee, Panier panier, Produit produit) {
+	public LigneCommandePanierProduit(int id, int quantiteCommandee, Panier panier) {
 		super();
 		this.id = id;
 		this.quantiteCommandee = quantiteCommandee;
 		this.panier = panier;
-		this.produit = produit;
+	
 	}
 
 	public LigneCommandePanierProduit() {
@@ -42,18 +41,11 @@ public class LigneCommandePanierProduit {
 		this.panier = panier;
 	}
 
-	public Produit getProduit() {
-		return produit;
-	}
-
-	public void setProduit(Produit produit) {
-		this.produit = produit;
-	}
 
 	@Override
 	public String toString() {
 		return "LigneCommandePanierProduit [id=" + id + ", quantiteCommandee=" + quantiteCommandee + ", panier="
-				+ panier + ", produit=" + produit + "]";
+				+ panier;
 	}
 
 }

@@ -19,13 +19,21 @@ public class TestUtilisateur {
 		Purchasser acheteur = new Purchasser(0, "Thierry.dupont@gmail.com", "azerty", "0222222", "189",
 				"Thierry Dupont", adresse1);
 		Purchasser acheteur2 = new Purchasser(2, "geoffroy@gmail.com", "azerty", "0222222", "189", "Thierry Dupont",
-				adresse1);
+					adresse1);
+		Seller vendeur1 = new Seller(0, "geoffroy.alarcon@gmail.com", "test", "lorem", "122", "testsqdsd");
+Seller vendeur2 = new Seller(0, "geoffroy.alarcon@gmail.com", "test", "lorem", "122", "testsqdsd");
+tableau.addSeller(vendeur1);
+tableau.addSeller(vendeur2);
 
-		
 		tableau.addPurchaser(acheteur);
 		tableau.addPurchaser(acheteur2);
 		tableau.updateOnePurchasser(0, acheteur2);
-		for(Purchasser purchasser: tableau.findAllPurchasser())
+		for(Purchasser purchasser: tableau.findAllPurchasser()) {
 			System.out.println(purchasser);
 	}
-} // fin de la classe
+	
+	for(Seller vendeur	: tableau.findallSeller()) {
+		System.out.println(vendeur);
+	}
+	
+	}} // fin de la classe

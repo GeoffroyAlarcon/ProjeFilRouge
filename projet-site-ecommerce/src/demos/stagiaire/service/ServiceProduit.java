@@ -58,11 +58,8 @@ public class ServiceProduit {
 
 	}
 
-	public Produit findAll() {
-		for (int i = 0; i < tableauDeProduit.size(); i++) {
-		 return tableauDeProduit.get(i);
-		}
-	return null;
+	public ArrayList<Produit> findAll() {
+		return tableauDeProduit;
 	}
 
 	public Produit findAllDisponible() {
