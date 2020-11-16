@@ -60,7 +60,9 @@ public class AddUserServlet extends HttpServlet {
 			Purchasser acheteur = new Purchasser(1, email, password, carteBancaire, numeroTel, identite, adresse);
 			serviceUtilisateur.addPurchaser(acheteur);
 			HttpSession session = request.getSession();
+			session.setAttribute("id", acheteur.getId());
 			session.setAttribute("serviceUser", serviceUtilisateur);
+			response.sendRedirect("home");
 		}
 		if (type.contains("seller")) {
 			String email = request.getParameter("email");
@@ -68,8 +70,13 @@ public class AddUserServlet extends HttpServlet {
 			String nomCompagnie = request.getParameter("compagnie");
 			String siret = request.getParameter("siret");
 			String description = request.getParameter("description");
-
 			Seller vendeur = new Seller(1, email, password, nomCompagnie, siret, description);
+			HttpSession session = request.getSession();
+			serviceUtilisateur.addSeller(vendeur);
+			session.setAttribute("id", vendeur.getId());
+			session.setAttribute("serviceUser", serviceUtilisateur);
+			response.sendRedirect("home");
+			
 		}
 	}
 

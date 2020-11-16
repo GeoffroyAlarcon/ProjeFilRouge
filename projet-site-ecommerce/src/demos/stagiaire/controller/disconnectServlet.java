@@ -8,21 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import demos.stagiaire.model.Purchasser;
-import demos.stagiaire.model.Seller;
-import demos.stagiaire.service.ServiceUtilisateur;
-
 /**
- * Servlet implementation class HomeServlet
+ * Servlet implementation class disconnectServlet
  */
-@WebServlet("/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/disconnect")
+public class disconnectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Default constructor.
+	 * @see HttpServlet#HttpServlet()
 	 */
-	public HomeServlet() {
+	public disconnectServlet() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -32,22 +29,10 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		ServiceUtilisateur serviceUtilisateur = (ServiceUtilisateur) session.getAttribute("serviceUser");
-		int id = (Integer) session.getAttribute("id");
-		Seller vendeur = serviceUtilisateur.findByIdSeller(id);
-		Purchasser acheteur = serviceUtilisateur.findByIdPourchasser(id);
-		if (vendeur != null) {
-
-			session.setAttribute("vendeur", vendeur);
-			getServletContext().getRequestDispatcher("/WEB-INF/vendeur/home.jsp").forward(request, response);
-		}
-		if (acheteur != null) {
-			request.setAttribute("identite", acheteur.getIdentite());
-			session.setAttribute("acheteur", acheteur);
-			getServletContext().getRequestDispatcher("/WEB-INF/acheteur/home.jsp").forward(request, response);
-		}
-		
+		session.invalidate();
+		response.sendRedirect("/auth");
 	}
 
 	/**

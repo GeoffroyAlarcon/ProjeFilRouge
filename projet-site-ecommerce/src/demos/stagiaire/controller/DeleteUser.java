@@ -1,6 +1,8 @@
 package demos.stagiaire.controller;
 
 import java.io.IOException;
+import java.nio.file.attribute.UserPrincipalLookupService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,21 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import demos.stagiaire.model.Purchasser;
 import demos.stagiaire.model.Seller;
 import demos.stagiaire.service.ServiceUtilisateur;
 
+
 /**
- * Servlet implementation class HomeServlet
+ * Servlet implementation class DeleteUser
  */
-@WebServlet("/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/deleteUser")
+public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Default constructor.
+	 * @see HttpServlet#HttpServlet()
 	 */
-	public HomeServlet() {
+	public DeleteUser() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,19 +40,18 @@ public class HomeServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		ServiceUtilisateur serviceUtilisateur = (ServiceUtilisateur) session.getAttribute("serviceUser");
 		int id = (Integer) session.getAttribute("id");
-		Seller vendeur = serviceUtilisateur.findByIdSeller(id);
-		Purchasser acheteur = serviceUtilisateur.findByIdPourchasser(id);
-		if (vendeur != null) {
-
-			session.setAttribute("vendeur", vendeur);
-			getServletContext().getRequestDispatcher("/WEB-INF/vendeur/home.jsp").forward(request, response);
+		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
+		Seller vendeur = (Seller) session.getAttribute("vendeur");
+		if (serviceUtilisateur.findByIdPourchasser(id) != null) {
+			serviceUtilisateur.removePurchaser(acheteur);
+			session.invalidate();
 		}
-		if (acheteur != null) {
-			request.setAttribute("identite", acheteur.getIdentite());
-			session.setAttribute("acheteur", acheteur);
-			getServletContext().getRequestDispatcher("/WEB-INF/acheteur/home.jsp").forward(request, response);
+		if (serviceUtilisateur.findByIdSeller(id) != null) {
+			serviceUtilisateur.removeSeller(vendeur);
+			session.invalidate();
+		 
 		}
-		
+		response.sendRedirect("/auth");
 	}
 
 	/**
