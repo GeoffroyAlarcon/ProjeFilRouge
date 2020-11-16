@@ -14,6 +14,14 @@ public class Adresse {
 		this.ville = ville;
 	}
 
+	public Adresse(String nomRue, String codePostal, String ville) {
+		super();
+
+		this.nomRue = nomRue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
+
 	public Adresse() {
 		super();
 	}
@@ -54,5 +62,5 @@ public class Adresse {
 	public String toString() {
 		return "Adresse [id=" + id + ", nomRue=" + nomRue + ", codePostal=" + codePostal + ", ville=" + ville + "]";
 	}
-	
+
 }

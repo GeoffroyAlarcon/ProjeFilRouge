@@ -8,8 +8,8 @@ import demos.stagiaire.model.Seller;
 
 public class ServiceUtilisateur {
 
-	private ArrayList<Purchasser> tableauDAcheteur = new ArrayList();
-	private ArrayList<Seller> tableauDeVendeur = new ArrayList();
+	private ArrayList<Purchasser> tableauDAcheteur = new ArrayList<Purchasser>();
+	private ArrayList<Seller> tableauDeVendeur = new ArrayList<Seller>();
 
 	public ServiceUtilisateur() {
 	}
@@ -58,10 +58,10 @@ public class ServiceUtilisateur {
 
 	}
 
-	public Purchasser findByLoginPourchasser(String email, String passeword) {
+	public Purchasser findByLoginPourchasser(String email, String password) {
 		for (int i = 0; i < tableauDAcheteur.size(); i++) {
 			Purchasser findPurchasser = tableauDAcheteur.get(i);
-			if (email.equals(findPurchasser.getEmail()) && passeword.equals(findPurchasser.getPasseword())) {
+			if (email.equals(findPurchasser.getEmail()) && password.equals(findPurchasser.getPassword())) {
 				return tableauDAcheteur.get(i);
 			}
 
@@ -70,10 +70,10 @@ public class ServiceUtilisateur {
 
 	}
 
-	public Seller findByLoginSeller(String email, String passeword) {
+	public Seller findByLoginSeller(String email, String password) {
 		for (int i = 0; i < tableauDeVendeur.size(); i++) {
 			Seller findSeller = tableauDeVendeur.get(i);
-			if (email.equals(findSeller.getEmail()) && passeword.equals(findSeller.getPasseword())) {
+			if (email.equals(findSeller.getEmail()) && password.equals(findSeller.getPassword())) {
 				return tableauDeVendeur.get(i);
 			}
 
@@ -124,9 +124,8 @@ public class ServiceUtilisateur {
 	}
 
 	public ArrayList<Seller> findallSeller() {
-	return tableauDeVendeur;	
+		return tableauDeVendeur;
 	}
-
 
 	@Override
 	public String toString() {

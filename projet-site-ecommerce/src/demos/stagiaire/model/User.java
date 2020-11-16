@@ -3,13 +3,13 @@ package demos.stagiaire.model;
 public class User {
 	private int id;
 	private String email;
-	private String passeword;
+	private String password;
 
-	public User(int id, String email, String passeword) {
+	public User(int id, String email, String password) {
 		super();
 		this.id = id;
 		this.email = email;
-		this.passeword = passeword;
+		this.password = password;
 	}
 
 	public User() {
@@ -33,17 +33,17 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPasseword() {
-		return passeword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasseword(String passeword) {
-		this.passeword = passeword;
+	public void setPassword(String passeword) {
+		this.password = passeword;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", Passeword=" + passeword + "]";
+		return "User [id=" + id + ", email=" + email + ", Password=" + password + "]";
 	}
 
 }

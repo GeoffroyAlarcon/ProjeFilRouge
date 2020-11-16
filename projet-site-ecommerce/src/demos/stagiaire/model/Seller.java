@@ -4,16 +4,19 @@ public class Seller extends User {
 	private String nomCompagnie;
 	private String siret;
 	private String description;
-	public Seller(int id, String email, String passeword, String nomCompagnie, String siret, String description) {
-		super(id, email, passeword);
+
+	public Seller(int id, String email, String password, String nomCompagnie, String siret, String description) {
+		super(id, email, password);
 		this.nomCompagnie = nomCompagnie;
 		this.siret = siret;
 		this.description = description;
 	}
+	
 
 	public Seller() {
 		super();
-			}
+	}
+
 	public String getNomCompagnie() {
 		return nomCompagnie;
 	}
@@ -43,8 +46,5 @@ public class Seller extends User {
 		return "Seller [nomCompagnie=" + nomCompagnie + ", siret=" + siret + ", description=" + description
 				+ ", toString()=" + super.toString() + "]";
 	}
-
-	
-	
 
 }
