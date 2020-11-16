@@ -8,10 +8,10 @@ public class Produit {
 	private Seller vendeur;
 	private String imageURL;
 	private String description;
-	private String caractéristique;
+	private String caracteristique;
 
 	public Produit(int id, String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
-			String description, String caractéristique) {
+			String description, String caracteristique) {
 		super();
 		this.id = id;
 		this.designation = designation;
@@ -20,7 +20,7 @@ public class Produit {
 		this.vendeur = vendeur;
 		this.imageURL = imageURL;
 		this.description = description;
-		caractéristique = caractéristique;
+		this.caracteristique = caracteristique;
 	}
 
 	public Produit() {
@@ -83,19 +83,19 @@ public class Produit {
 		this.description = description;
 	}
 
-	public String getCaractéristique() {
-		return caractéristique;
+	public String getCaracteristique() {
+		return caracteristique;
 	}
 
-	public void setCaractéristique(String caractéristique) {
-		caractéristique = caractéristique;
+	public void setCaracteristique(String caracteristique) {
+		this.caracteristique = caracteristique;
 	}
 
 	@Override
 	public String toString() {
 		return "Produit [id=" + id + ", designation=" + designation + ", prixUnitaire=" + prixUnitaire
 				+ ", quantiteStock=" + quantiteStock + ", vendeur=" + vendeur + ", imageURL=" + imageURL
-				+ ", description=" + description + ", Caractéristique=" + caractéristique + "]";
+				+ ", description=" + description + ", Caracteristique=" + caracteristique + "]";
 	}
 
 }

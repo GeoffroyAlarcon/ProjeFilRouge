@@ -6,23 +6,17 @@ import java.util.Arrays;
 import demos.stagiaire.model.Produit;
 
 public class ServiceProduit {
-	private ArrayList<Produit> tableauDeProduit = new ArrayList();
+	private ArrayList<Produit> tableauDeProduit = new  ArrayList<Produit>();
 
-	public ServiceProduit(ArrayList tableauDeProduit) {
-		super();
-		this.tableauDeProduit = tableauDeProduit;
-	}
 
 	public ServiceProduit() {
-		super();
 	}
 
-	public ArrayList getTableauDeProduit() {
+	public ArrayList<Produit> getTableauDeProduit() {
 		return tableauDeProduit;
 	}
 
-	public void setTableauDeProduit(ArrayList tableauDeProduit) {
-		tableauDeProduit = tableauDeProduit;
+	public void setTableauDeProduit() {
 	}
 
 	public void addProcduct(Produit produit) {
