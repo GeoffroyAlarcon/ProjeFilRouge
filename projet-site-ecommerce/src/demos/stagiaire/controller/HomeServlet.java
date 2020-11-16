@@ -34,20 +34,8 @@ public class HomeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		ServiceUtilisateur serviceUtilisateur = (ServiceUtilisateur) session.getAttribute("serviceUser");
-		int id = (Integer) session.getAttribute("id");
-		Seller vendeur = serviceUtilisateur.findByIdSeller(id);
-		Purchasser acheteur = serviceUtilisateur.findByIdPourchasser(id);
-		if (vendeur != null) {
+		getServletContext().getRequestDispatcher("/WEB-INF/acheteur/home.jsp").forward(request, response);
 
-			session.setAttribute("vendeur", vendeur);
-			getServletContext().getRequestDispatcher("/WEB-INF/vendeur/home.jsp").forward(request, response);
-		}
-		if (acheteur != null) {
-			request.setAttribute("identite", acheteur.getIdentite());
-			session.setAttribute("acheteur", acheteur);
-			getServletContext().getRequestDispatcher("/WEB-INF/acheteur/home.jsp").forward(request, response);
-		}
-		
 	}
 
 	/**

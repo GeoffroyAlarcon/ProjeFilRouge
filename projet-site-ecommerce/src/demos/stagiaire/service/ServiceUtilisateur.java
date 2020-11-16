@@ -2,6 +2,7 @@ package demos.stagiaire.service;
 
 import java.util.ArrayList;
 
+import demos.stagiaire.model.Adresse;
 import demos.stagiaire.model.Purchasser;
 
 import demos.stagiaire.model.Seller;
@@ -12,6 +13,8 @@ public class ServiceUtilisateur {
 	private ArrayList<Seller> tableauDeVendeur = new ArrayList<Seller>();
 
 	public ServiceUtilisateur() {
+		tableauDAcheteur.add(
+				(new Purchasser(1, "geoffroy@gmail.com", "azerty", "022222", "0600000", "Alarcon", new Adresse())));
 	}
 
 	public ArrayList<Purchasser> getTableauDAcheteur() {
@@ -58,7 +61,7 @@ public class ServiceUtilisateur {
 
 	}
 
-	public Purchasser findByLoginPourchasser(String email, String password) {
+	public Purchasser findByLoginPurchasser(String email, String password) {
 		for (int i = 0; i < tableauDAcheteur.size(); i++) {
 			Purchasser findPurchasser = tableauDAcheteur.get(i);
 			if (email.equals(findPurchasser.getEmail()) && password.equals(findPurchasser.getPassword())) {

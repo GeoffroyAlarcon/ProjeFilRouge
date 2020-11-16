@@ -7,13 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous">
-
+href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a6c393237d.js"></script>
 </head>
 <body>
-	<!-- Navigation -->
+	<!-- Navigation -->	<div class="container-fluid bg-dark text-white text-center">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container">
 			<a class="navbar-brand" href="index.html">Orinoco</a>
@@ -32,14 +36,14 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid bg-dark text-white text-center">
-		<form action="auth" method="post">
-			<label for="identifiant"> identifiant : </label> <input name="identifiant" type="text">
-			<label for="mdp"> Mot de passe : </label> <input name="mdp"
-				type="text"> <input type="submit" value="envoyer">
+
+		<form action="auth" method="POST">
+			<label for="email"> adresse mail : </label> <input name="email" type="email">
+			<label for="password"> Mot de passe : </label> <input name="password"
+				type="password"> <input type="submit" value="envoyer">
 		</form>
-		<c:url var = "newUser" value ="/newUser"> </c:url>
-		<a href="${newUser }">   Nouvel utilisateur ? </a>
+		<c:url var = "addUser" value ="/addUser"> </c:url>
+		<a href="${addUser }">   Nouvel utilisateur ? </a>
 	</div>
 
 	<!-- end Navigation-->
