@@ -18,7 +18,7 @@
 				share your email with anyone else.</small>
 		</div>
 		<div class="form-group">
-			<label for="exampleInputPassword1">Password</label> <input
+			<label for="passe">Password</label> <input
 				type="password" class="form-control" name="password"
 				placeholder="Password">
 		</div>

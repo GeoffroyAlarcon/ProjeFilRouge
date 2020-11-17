@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import demos.stagiaire.model.Purchasser;
-import demos.stagiaire.model.Seller;
+
+import demos.stagiaire.service.ServiceProduit;
 import demos.stagiaire.service.ServiceUtilisateur;
 
 /**
@@ -18,6 +18,8 @@ import demos.stagiaire.service.ServiceUtilisateur;
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private ServiceProduit serviceProduit = new ServiceProduit();
 
 	/**
 	 * Default constructor.
@@ -34,6 +36,9 @@ public class HomeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		ServiceUtilisateur serviceUtilisateur = (ServiceUtilisateur) session.getAttribute("serviceUser");
+		session.setAttribute("serviceProduit", serviceProduit);
+		session.setAttribute("users", serviceUtilisateur);
+		request.setAttribute("produits", serviceProduit.findAll());
 		getServletContext().getRequestDispatcher("/WEB-INF/acheteur/home.jsp").forward(request, response);
 
 	}

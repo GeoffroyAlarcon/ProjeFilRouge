@@ -8,10 +8,10 @@ public class Produit {
 	private Seller vendeur;
 	private String imageURL;
 	private String description;
-	private String caracteristique;
+	private String [] couleur;
 
 	public Produit(int id, String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
-			String description, String caracteristique) {
+			String description, String [] couleur) {
 		super();
 		this.id = id;
 		this.designation = designation;
@@ -20,7 +20,7 @@ public class Produit {
 		this.vendeur = vendeur;
 		this.imageURL = imageURL;
 		this.description = description;
-		this.caracteristique = caracteristique;
+		this.couleur = couleur;
 	}
 
 	public Produit() {
@@ -83,19 +83,13 @@ public class Produit {
 		this.description = description;
 	}
 
-	public String getCaracteristique() {
-		return caracteristique;
-	}
-
-	public void setCaracteristique(String caracteristique) {
-		this.caracteristique = caracteristique;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "Produit [id=" + id + ", designation=" + designation + ", prixUnitaire=" + prixUnitaire
 				+ ", quantiteStock=" + quantiteStock + ", vendeur=" + vendeur + ", imageURL=" + imageURL
-				+ ", description=" + description + ", Caracteristique=" + caracteristique + "]";
+				+ ", description=" + description + ", Couleur=" + couleur + "]";
 	}
 
 }
