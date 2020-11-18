@@ -85,6 +85,14 @@ public class Produit {
 
 	
 
+	public String[] getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(String[] couleur) {
+		this.couleur = couleur;
+	}
+
 	@Override
 	public String toString() {
 		return "Produit [id=" + id + ", designation=" + designation + ", prixUnitaire=" + prixUnitaire

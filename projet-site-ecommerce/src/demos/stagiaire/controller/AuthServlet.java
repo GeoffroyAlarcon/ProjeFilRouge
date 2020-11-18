@@ -9,15 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import demos.stagiaire.model.Purchasser;
+import demos.stagiaire.model.Seller;
+import demos.stagiaire.service.ServiceProduit;
 import demos.stagiaire.service.ServiceUtilisateur;
 
 /**
  * Servlet implementation class AuthServlet
  */
-@WebServlet("/auth")
+@WebServlet({ "/auth", "/authPurchasser", "/authSeller" })
 public class AuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
+	private ServiceProduit serviceProduit = new ServiceProduit();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -33,9 +36,12 @@ public class AuthServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		this.getServletContext().getRequestDispatcher("index.js").forward(request, response);
-}
+
+		if (request.getServletPath().contains("authSeller")) {
+			this.getServletContext().getRequestDispatcher("/WEB-INF/vendeur/auth.jsp").forward(request, response);
+		}
+		this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -43,15 +49,27 @@ public class AuthServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		Purchasser acheteur = serviceUtilisateur.findByLoginPurchasser(email, password);
-		if (acheteur != null) {
+		Seller vendeur = serviceUtilisateur.findByLoginSeller(email, password);
+		session.setAttribute("serviceProduit", serviceProduit);
+		if (request.getServletPath().contains("authPurchasser") && acheteur != null) {
+			System.out.println("hello world !");
 			session.setAttribute("serviceUser", serviceUtilisateur);
 			session.setAttribute("acheteur", acheteur);
 			response.sendRedirect("home");
-		} else {
+		} else if (vendeur != null) {
+			session.setAttribute("serviceUser", serviceUtilisateur);
+			session.setAttribute("vendeur", vendeur);
+			System.out.println("hello world !");
+			response.sendRedirect("home");
+
+		}
+
+		else {
 			this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 		}
 

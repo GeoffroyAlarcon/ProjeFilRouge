@@ -13,6 +13,9 @@
 						href="product.html?id=5be9c8541c9d440000665243">Ourson</a></li>
 					<li class="nav-item"><a class="nav-link" href="cart.html">Panier</a>
 					</li>
+						<li class="nav-item"><c:url var="deconnexion"
+						value="/disconnect"></c:url> <a class="nav-link"
+					href="${ deconnexion }">deconnection</a></li>
 				</ul>
 			</div>
 		</div>

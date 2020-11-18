@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<c:forEach items="${produits }" var="produit" varStatus="status">
+			<c:forEach items="${produits}" var="produit" varStatus="status">
 				<div class="col-md-3 text-center">
 
 					<h4 class="text-primary">

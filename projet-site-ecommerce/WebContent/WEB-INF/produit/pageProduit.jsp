@@ -35,7 +35,11 @@
 				</p>
 				<p>
 					couleur :
-					<c:out value="${produit.couleur }"></c:out>
+					<c:forEach items="${produit.couleur}" var="x">
+						<p>
+							<c:out value="${x}"></c:out>
+						</p>
+					</c:forEach>
 				</p>
 				<p>
 					Description :

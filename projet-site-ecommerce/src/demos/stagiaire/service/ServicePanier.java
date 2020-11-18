@@ -57,10 +57,8 @@ public class ServicePanier {
 		}
 	}
 
-	public LigneCommandePanierProduit findAll() {
-		for (int i = 0; i < panierclient.size(); i++) {
-			return panierclient.get(i);
-		}
-		return null;
-	}
+	public ArrayList<LigneCommandePanierProduit> findAll() {
+			return panierclient;
+		
+}
 }
