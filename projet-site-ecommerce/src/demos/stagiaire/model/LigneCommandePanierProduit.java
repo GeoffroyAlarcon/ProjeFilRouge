@@ -3,14 +3,14 @@ package demos.stagiaire.model;
 public class LigneCommandePanierProduit {
 	private int id;
 	private int quantiteCommandee;
-	private Panier panier;
+	private Produit produit;
 
-	public LigneCommandePanierProduit(int id, int quantiteCommandee, Panier panier) {
+	public LigneCommandePanierProduit(int id, int quantiteCommandee, Produit produit) {
 		super();
 		this.id = id;
 		this.quantiteCommandee = quantiteCommandee;
-		this.panier = panier;
-	
+		this.produit = produit;
+
 	}
 
 	public LigneCommandePanierProduit() {
@@ -33,19 +33,24 @@ public class LigneCommandePanierProduit {
 		this.quantiteCommandee = quantiteCommandee;
 	}
 
-	public Panier getPanier() {
-		return panier;
+	public Produit getProduit() {
+		return produit;
 	}
 
-	public void setPanier(Panier panier) {
-		this.panier = panier;
+	public void setProduit(Produit produit) {
+		this.produit = produit;
 	}
 
+	public float montant() {
+		float montant = this.quantiteCommandee * this.produit.getPrixUnitaire();
+		return montant;
+
+	}
 
 	@Override
 	public String toString() {
-		return "LigneCommandePanierProduit [id=" + id + ", quantiteCommandee=" + quantiteCommandee + ", panier="
-				+ panier;
+		return "LigneCommandePanierProduit [id=" + id + ", quantiteCommandee=" + quantiteCommandee + ", produit="
+				+ produit + "]";
 	}
 
 }

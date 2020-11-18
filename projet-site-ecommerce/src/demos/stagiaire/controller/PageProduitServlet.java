@@ -8,7 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import demos.stagiaire.model.LigneCommande;
+import demos.stagiaire.model.LigneCommandePanierProduit;
+import demos.stagiaire.model.Panier;
 import demos.stagiaire.model.Produit;
+import demos.stagiaire.model.Purchasser;
+
 import demos.stagiaire.service.ServiceProduit;
 
 /**
@@ -48,7 +53,15 @@ public class PageProduitServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession session = request.getSession();
+		int idProduit = Integer.parseInt((String) request.getParameter("idObject"));
+		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
+		Produit produit = serviceProduit.findById(idProduit);
+		Panier panier = (Panier) session.getAttribute("panier");
+		int quantiteCommandee = Integer.parseInt(request.getParameter("quantite"));
+		LigneCommandePanierProduit ligneCommandePanierProduit = new LigneCommandePanierProduit(1, quantiteCommandee, produit);
+		panier.addInCart(ligneCommandePanierProduit);
+		response.sendRedirect("panier");
 	}
 
 }

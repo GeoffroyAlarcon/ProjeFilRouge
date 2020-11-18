@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import demos.stagiaire.model.Panier;
 import demos.stagiaire.model.Purchasser;
 import demos.stagiaire.model.Seller;
 import demos.stagiaire.service.ServiceProduit;
@@ -57,16 +58,16 @@ public class AuthServlet extends HttpServlet {
 		Seller vendeur = serviceUtilisateur.findByLoginSeller(email, password);
 		session.setAttribute("serviceProduit", serviceProduit);
 		if (request.getServletPath().contains("authPurchasser") && acheteur != null) {
-			System.out.println("hello world !");
-			session.setAttribute("serviceUser", serviceUtilisateur);
+			Panier panier = new Panier(acheteur);
 			session.setAttribute("acheteur", acheteur);
+			session.setAttribute("panier", panier);
+			session.setAttribute("serviceUser", serviceUtilisateur);
 			response.sendRedirect("home");
 		} else if (vendeur != null) {
 			session.setAttribute("serviceUser", serviceUtilisateur);
 			session.setAttribute("vendeur", vendeur);
 			System.out.println("hello world !");
 			response.sendRedirect("home");
-
 		}
 
 		else {

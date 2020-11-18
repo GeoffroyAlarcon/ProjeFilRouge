@@ -36,6 +36,10 @@
 							value="/pageProduit?idObject=${produit.id}"></c:url>
 						<a href="${pageProduit}"> test </a>
 					</div>
+					<c:url  value="/supprimeProduitidObject=${produit.id}" var ="suprime"></c:url>
+					<a href="">
+						<button class="btn btn-primary" type="button"> Supprimez article </button>
+					</a>
 				</c:forEach>
 				<c:url var="ajoutProduit" value="/ajoutProduit">
 				</c:url>

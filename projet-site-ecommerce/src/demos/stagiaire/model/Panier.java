@@ -1,34 +1,34 @@
 package demos.stagiaire.model;
 
-public class Panier {
-	private int id;
-	private Produit produit;
-	private Purchasser acheteur;
+import java.util.ArrayList;
 
-	public Panier(int id, Produit produit, Purchasser acheteur) {
+public class Panier {
+	ArrayList<LigneCommandePanierProduit> panierProduits = new ArrayList<LigneCommandePanierProduit>();
+	Purchasser acheteur = new Purchasser();
+
+
+	public Panier(ArrayList<LigneCommandePanierProduit> panierProduits, Purchasser acheteur) {
 		super();
-		this.id = id;
-		this.produit = produit;
+		this.panierProduits = panierProduits;
 		this.acheteur = acheteur;
 	}
+
+	public Panier(Purchasser acheteur) {
+		super();
+		this.acheteur = acheteur;
+	}
+
 	public Panier() {
 		super();
-		
-	}
-	public int getId() {
-		return id;
+
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public ArrayList<LigneCommandePanierProduit> getPanier() {
+		return panierProduits;
 	}
 
-	public Produit getProduit() {
-		return produit;
-	}
-
-	public void setProduit(Produit produit) {
-		this.produit = produit;
+	public void setPanier(ArrayList<LigneCommandePanierProduit> panier) {
+		this.panierProduits = panier;
 	}
 
 	public Purchasser getAcheteur() {
@@ -38,9 +38,38 @@ public class Panier {
 	public void setAcheteur(Purchasser acheteur) {
 		this.acheteur = acheteur;
 	}
-	@Override
-	public String toString() {
-		return "Panier [id=" + id + ", produit=" + produit + ", acheteur=" + acheteur + "]";
+
+	public void addInCart(LigneCommandePanierProduit panier) {
+		panierProduits.add(panier);
 	}
 
+	public void removeInCart(LigneCommandePanierProduit panier) {
+		panierProduits.remove(panier);
+	}
+
+	public LigneCommandePanierProduit findById(int id) {
+		for (int i = 0; i < panierProduits.size(); i++) {
+			LigneCommandePanierProduit findlignedeCommandePanierProduit = panierProduits.get(i);
+			if (id == findlignedeCommandePanierProduit.getId()) {
+				return panierProduits.get(i);
+			}
+
+		}
+		return null;
+	}
+
+	public void updateOne(int id, LigneCommandePanierProduit ligneCommandePanierProduit) {
+		for (int i = 0; i < panierProduits.size(); i++) {
+			LigneCommandePanierProduit findCommandePanierProduit = panierProduits.get(i);
+			if (id == findCommandePanierProduit.getId()) {
+				panierProduits.remove(findCommandePanierProduit);
+				panierProduits.add(ligneCommandePanierProduit);
+			}
+		}
+	}
+
+	public ArrayList<LigneCommandePanierProduit> findAll() {
+		return panierProduits;
+
+	}
 }

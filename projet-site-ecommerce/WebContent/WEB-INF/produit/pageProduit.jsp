@@ -46,22 +46,32 @@
 					<c:out value="${produit.description }"></c:out>
 				</p>
 			</div>
-			<form action="pageProduit" method="post">
-				<div class="form-group">
-					<label for="quantite"> quantité choisie :</label> <select
-						name="quantite" id="quantite">
-						<c:forEach begin="0" end="5" step="1" var="x">
-							<option value=" ${x}">${x}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Ajouter au panier" />
-				</div>
-			</form>
+			<div class="col-lg-3">
+				<form action="pageProduit" method="post">
+					<div class="form-group">
+						<label for="quantite"> quantité choisie :</label> <select
+							name="quantite" id="quantite">
+							<c:forEach begin="0" end="5" step="1" var="x">
+								<option value=" ${x}">${x}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="couleur"> Couleur :</label> <select name="quantite"
+							id="quantite">
+							<c:forEach items="${produit.couleur }" var="couleur">
+								<option value=" ${couleur}">${couleur}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="form-group">
+						<input class="btn btn-primary" type="submit"
+							value="Ajouter au panier" />
+					</div>
+				</form>
+			</div>
+
 		</div>
-
 	</div>
-
 </body>
 </html>
