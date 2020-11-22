@@ -6,7 +6,6 @@ public class Panier {
 	ArrayList<LigneCommandePanierProduit> panierProduits = new ArrayList<LigneCommandePanierProduit>();
 	Purchasser acheteur = new Purchasser();
 
-
 	public Panier(ArrayList<LigneCommandePanierProduit> panierProduits, Purchasser acheteur) {
 		super();
 		this.panierProduits = panierProduits;

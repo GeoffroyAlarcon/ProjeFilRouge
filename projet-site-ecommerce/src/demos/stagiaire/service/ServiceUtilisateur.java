@@ -14,7 +14,7 @@ public class ServiceUtilisateur {
 
 	public ServiceUtilisateur() {
 		tableauDAcheteur.add(
-				(new Purchasser(1, "geoffroy@gmail.com", "azerty", "022222", "0600000", "Alarcon", new Adresse())));
+				(new Purchasser(1, "g@gmail.com", "azerty", "022222", "0600000", "Alarcon", new Adresse())));
 		tableauDeVendeur.add(new Seller(2, "geoffroy@gmail.com", "azerty", "Orinoco", "22222", "lorem Ipsum"));
 	}
 

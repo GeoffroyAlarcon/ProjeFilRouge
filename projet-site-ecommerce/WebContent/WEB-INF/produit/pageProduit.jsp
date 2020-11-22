@@ -52,14 +52,14 @@
 						<label for="quantite"> quantité choisie :</label> <select
 							name="quantite" id="quantite">
 							<c:forEach begin="0" end="5" step="1" var="x">
-								<option value=" ${x}">${x}</option>
+								<option value="${x}">${x}</option>
 							</c:forEach>
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="couleur"> Couleur :</label> <select name="quantite"
-							id="quantite">
-							<c:forEach items="${produit.couleur }" var="couleur">
+						<label for="couleur"> Couleur :</label> <select name="couleur"
+							id="couleur">
+							<c:forEach items="${produit.couleur}" var="couleur">
 								<option value=" ${couleur}">${couleur}</option>
 							</c:forEach>
 						</select>
@@ -68,6 +68,7 @@
 						<input class="btn btn-primary" type="submit"
 							value="Ajouter au panier" />
 					</div>
+					  <c:set var="test" value="${id}" scope="request" />
 				</form>
 			</div>
 

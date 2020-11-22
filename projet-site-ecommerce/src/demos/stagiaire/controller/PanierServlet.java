@@ -14,10 +14,10 @@ import demos.stagiaire.model.Panier;
  * Servlet implementation class PannierServlet
  */
 @WebServlet("/panier")
-public class PannierServlet extends HttpServlet {
+public class PanierServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public PannierServlet() {
+	public PanierServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -31,8 +31,7 @@ public class PannierServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Panier panier = (Panier) session.getAttribute("panier");
 		request.setAttribute("cart", panier.findAll());
-		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/produit/panier.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/WEB-INF/produit/panier.jsp").forward(request, response);
 	}
 
 	/**

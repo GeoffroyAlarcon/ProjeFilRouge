@@ -16,13 +16,14 @@ import demos.stagiaire.model.Purchasser;
 
 import demos.stagiaire.service.ServiceProduit;
 
+
 /**
  * Servlet implementation class PageProduitServlet
  */
 @WebServlet("/pageProduit")
 public class PageProduitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+private ServiceProduit serviceProduit = new ServiceProduit();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -38,11 +39,12 @@ public class PageProduitServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	
 		HttpSession session = request.getSession();
 		int idProduit = Integer.parseInt((String) request.getParameter("idObject"));
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
 		Produit produit = serviceProduit.findById(idProduit);
-		request.setAttribute("produit", produit);
+		session.setAttribute("produit", produit);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/produit/pageProduit.jsp").forward(request, response);
 	}
 
@@ -52,14 +54,14 @@ public class PageProduitServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
+		System.out.println(request.getAttribute("test"));
 		HttpSession session = request.getSession();
-		int idProduit = Integer.parseInt((String) request.getParameter("idObject"));
-		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		Produit produit = serviceProduit.findById(idProduit);
+		Produit produit = (Produit) session.getAttribute("produit");
 		Panier panier = (Panier) session.getAttribute("panier");
 		int quantiteCommandee = Integer.parseInt(request.getParameter("quantite"));
-		LigneCommandePanierProduit ligneCommandePanierProduit = new LigneCommandePanierProduit(1, quantiteCommandee, produit);
+		LigneCommandePanierProduit ligneCommandePanierProduit = new LigneCommandePanierProduit(1, quantiteCommandee,
+				produit);
 		panier.addInCart(ligneCommandePanierProduit);
 		response.sendRedirect("panier");
 	}
