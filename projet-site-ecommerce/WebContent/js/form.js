@@ -2,7 +2,7 @@ let selectUser = document.getElementById("type");
 let option = document.getElementsByTagName("option")
 let formUser = document.getElementById("formUser")
 
-selectUser.addEventListener('change', function() {
+selectUser.addEventListener('input', function() {
 
 	if (selectUser.value === "purchasser") {
 		// Paramétrage des balises pour les acheteurs
@@ -60,7 +60,6 @@ selectUser.addEventListener('change', function() {
 	}
 	if (selectUser.value === "seller") {
 		// Paramétrage des balises pour les Vendeurs
-
 		let divCompagnie = document.createElement("div");
 		let labelCompagnie = document.createElement("label");
 		let inputCompagnie = document.createElement("input");

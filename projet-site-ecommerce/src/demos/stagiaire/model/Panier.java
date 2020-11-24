@@ -67,6 +67,15 @@ public class Panier {
 		}
 	}
 
+	public float prixTotalPanier() {
+		float prixTotal = 0;
+		for (LigneCommandePanierProduit produit : panierProduits) {
+			prixTotal = prixTotal + produit.montant();
+
+		}
+		return prixTotal;
+	}
+
 	public ArrayList<LigneCommandePanierProduit> findAll() {
 		return panierProduits;
 

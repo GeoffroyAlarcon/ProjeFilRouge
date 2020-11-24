@@ -49,6 +49,7 @@
 					</p>
 				</div>
 			</c:forEach>
+	<div class="col-12 text-center"> <h4> total du panier : <c:out value="${prixTotalPanier}"></c:out> euros </h4> </div>		
 		</div>
 		<!-- end of panier-->
 		<!-- form-->
