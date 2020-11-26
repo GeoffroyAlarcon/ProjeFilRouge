@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<form id="formUser" method="POST" action ="addUser">
+	<form  method="POST" action ="addUser">
 		<div class="form-group">
 			<label for="exampleInputEmail1">Email address</label> <input
 				type="email" class="form-control" name="email"
@@ -28,6 +28,8 @@
 				<option value="purchasser">acheteur</option>
 				<option value="seller">vendeur</option>
 			</select>
+		</div>
+		<div id="formUser">
 		</div>
 	</form>
 	<script type="text/javascript">

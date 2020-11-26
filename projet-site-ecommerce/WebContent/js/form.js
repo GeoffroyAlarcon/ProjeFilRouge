@@ -43,7 +43,7 @@ selectUser.addEventListener('input', function() {
 		inputSubmit.type = "submit";
 
 		// affichage du formulaire d'inscription pour les acheteurs
-
+		formUser.innerHTML = "";
 		formUser.appendChild(divCb).appendChild(labelCb).innerHTML = " Rentrez votre numéro de carte de  carte bancaire";
 		formUser.appendChild(divCb).appendChild(inputCb);
 		formUser.appendChild(divTel).appendChild(labelTel).innerHTML = " Rentrez votre numéro de carte de téléphone";
@@ -60,6 +60,7 @@ selectUser.addEventListener('input', function() {
 	}
 	if (selectUser.value === "seller") {
 		// Paramétrage des balises pour les Vendeurs
+		formUser.innerHTML = "";
 		let divCompagnie = document.createElement("div");
 		let labelCompagnie = document.createElement("label");
 		let inputCompagnie = document.createElement("input");
@@ -79,7 +80,8 @@ selectUser.addEventListener('input', function() {
 		divSubmit.className = "form-group";
 		let inputSubmit = document.createElement("input");
 		inputSubmit.type = "submit";
-		// affichage du formulaire d'inscription pour les vendeurs 
+		// affichage du formulaire d'inscription pour les vendeurs
+		formUser.innerhtml = "";
 		formUser.appendChild(divCompagnie).appendChild(labelCompagnie).innerHTML = " Rentrez le nom de votre Compagnie";
 		formUser.appendChild(divCompagnie).appendChild(inputCompagnie);
 		formUser.appendChild(divSiret).appendChild(labelSiret).innerHTML = " Rentrez Votre numéro de Siret";
