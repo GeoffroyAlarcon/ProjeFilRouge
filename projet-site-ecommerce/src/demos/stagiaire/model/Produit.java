@@ -23,6 +23,23 @@ public class Produit {
 		this.couleur = couleur;
 	}
 
+	public Produit(int id, String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
+			String description) {
+		super();
+		this.id = id;
+		this.designation = designation;
+		this.prixUnitaire = prixUnitaire;
+		this.quantiteStock = quantiteStock;
+		this.vendeur = vendeur;
+		this.imageURL = imageURL;
+		this.description = description;
+	}
+
+	public Produit(int id) {
+		super();
+		this.id = id;
+	}
+
 	public Produit() {
 		super();
 	}

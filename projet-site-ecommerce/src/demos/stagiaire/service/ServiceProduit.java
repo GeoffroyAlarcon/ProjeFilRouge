@@ -9,7 +9,8 @@ public class ServiceProduit {
 	private ArrayList<Produit> tableauDeProduit = new ArrayList<Produit>();
 
 	public ServiceProduit() {
-		tableauDeProduit.add(new Produit(1, "Garfunkel", 25, 10, new Seller(),
+
+		tableauDeProduit.add(new Produit(1, "Garfunkel", 25, 2, new Seller(),
 				"https://lagranderecre-lagranderecre-fr-storage.omn.proximis.com/Imagestorage/imagesSynchro/0/0/c6037e6e50767e22233191637bafe63a103b4da9_IMG-PRODUCT-847442-1.jpeg",
 				"lorem ipsum", new String[] { "bleu", "beige" }));
 		tableauDeProduit.add(new Produit(2, "Eliot", 25, 10, new Seller(),

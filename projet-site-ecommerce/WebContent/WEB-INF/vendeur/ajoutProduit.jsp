@@ -26,7 +26,6 @@
 <label for="quantiteStock"> Quantité de l'article :</label><input name="quantiteStock" type="number" />
 <label for="imageURL"></label> URL de l'image : <input name ="imageURL" type="text" />
 <label for="description"></label> description : <input name = description type="text" />
-<label for="couleur"> couleur</label>
 <button class="btn btn-primary"> ajouter</button>
 </form>
 </body>

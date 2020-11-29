@@ -66,7 +66,6 @@ public class AuthServlet extends HttpServlet {
 		} else if (vendeur != null) {
 			session.setAttribute("serviceUser", serviceUtilisateur);
 			session.setAttribute("vendeur", vendeur);
-			System.out.println("hello world !");
 			response.sendRedirect("home");
 		}
 

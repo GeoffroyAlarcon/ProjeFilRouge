@@ -19,35 +19,53 @@
 			<div class="col">
 				<h1 class="text-center my-4">Votre liste d'articles en vente</h1>
 			</div>
-			<div class="row">
-				<c:forEach items="${produitsVendeur}" var="produit"
-					varStatus="status">
-					<div class="col-md-3 text-center">
+		</div>
 
-						<h4 class="text-primary">
-							<c:out value="${ produit.designation}"></c:out>
-						</h4>
-						<img alt="" src="${produit.imageURL}">
-						<p>
-							prix :
-							<c:out value="${produit.prixUnitaire} euros"></c:out>
-						</p>
-						<c:url var="pageProduit"
-							value="/pageProduit?idObject=${produit.id}"></c:url>
-						<a href="${pageProduit}"> test </a>
-					</div>
-					<c:url  value="/supprimeProduitidObject=${produit.id}" var ="suprime"></c:url>
-					<a href="">
-						<button class="btn btn-primary" type="button"> Supprimez article </button>
+		<c:forEach items="${produitsVendeur}" var="produit" varStatus="status">
+			<div class="row">
+				<div class="col-md-3">
+					<h4 class="text-primary">
+						<c:out value="${ produit.designation}"></c:out>
+					</h4>
+				</div>
+
+				<div class="col-md-3">
+					<img alt="" src="${produit.imageURL}">
+				</div>
+
+				<div class="col-md-3">
+					<p>
+						prix :
+						<c:out value="${produit.prixUnitaire }"></c:out>
+						euros
+					</p>
+					<p>
+						Quantité en stock :
+						<c:out value="${produit.quantiteStock }"></c:out>
+					</p>
+				</div>
+				<div class="col-md-3">
+					<c:url var="updateProduct"
+						value="/updateProduct?idObject=${produit.id}"></c:url>
+					<a href="${updateProduct}"> Modifier </a>
+
+
+					<c:url  var="deleteProduct" value="/deleteProduct?idObject=${produit.id}"></c:url>
+					<a href="${deleteProduct}">
+						<button class="btn btn-primary" type="button">Supprimez
+							article</button>
 					</a>
-				</c:forEach>
+				</div>
+			</div>
+		</c:forEach>
+		<div class="row">
+			<div class="offset-md-4 col-md-3 text-center">
 				<c:url var="ajoutProduit" value="/ajoutProduit">
 				</c:url>
 				<a href="${ajoutProduit }">
 					<button type="button">ajouter un article</button>
 				</a>
 			</div>
-			<div class="row"></div>
 		</div>
-		<div class="row"></div>
 	</div>
+	

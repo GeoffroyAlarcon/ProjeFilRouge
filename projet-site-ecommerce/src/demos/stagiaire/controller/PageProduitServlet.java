@@ -16,14 +16,14 @@ import demos.stagiaire.model.Purchasser;
 
 import demos.stagiaire.service.ServiceProduit;
 
-
 /**
  * Servlet implementation class PageProduitServlet
  */
 @WebServlet("/pageProduit")
 public class PageProduitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-private ServiceProduit serviceProduit = new ServiceProduit();
+
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -39,14 +39,15 @@ private ServiceProduit serviceProduit = new ServiceProduit();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
+
 		HttpSession session = request.getSession();
 		int idProduit = Integer.parseInt((String) request.getParameter("idObject"));
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
 		Produit produit = serviceProduit.findById(idProduit);
 		session.setAttribute("produit", produit);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/produit/pageProduit.jsp").forward(request, response);
-	}
+
+			}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -54,7 +55,7 @@ private ServiceProduit serviceProduit = new ServiceProduit();
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
+
 		System.out.println(request.getAttribute("test"));
 		HttpSession session = request.getSession();
 		Produit produit = (Produit) session.getAttribute("produit");
@@ -62,8 +63,17 @@ private ServiceProduit serviceProduit = new ServiceProduit();
 		int quantiteCommandee = Integer.parseInt(request.getParameter("quantite"));
 		LigneCommandePanierProduit ligneCommandePanierProduit = new LigneCommandePanierProduit(1, quantiteCommandee,
 				produit);
-		panier.addInCart(ligneCommandePanierProduit);
-		response.sendRedirect("panier");
+
+		if (produit.getQuantiteStock() < ligneCommandePanierProduit.getQuantiteCommandee()) {
+			System.err.println("la quantité commandée est suppérieure à la quantité en stock !");
+			this.getServletContext().getRequestDispatcher("/WEB-INF/produit/pageProduit.jsp").forward(request,
+					response);
+
+		} else {
+			produit.setQuantiteStock(produit.getQuantiteStock() - ligneCommandePanierProduit.getQuantiteCommandee());
+			panier.addInCart(ligneCommandePanierProduit);
+			response.sendRedirect("panier");
+		}
 	}
 
 }

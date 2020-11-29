@@ -8,16 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import demos.stagiaire.model.Panier;
+import demos.stagiaire.model.Produit;
+import demos.stagiaire.service.ServiceProduit;
 
 /**
- * Servlet implementation class PannierServlet
+ * Servlet implementation class DeleteProduct
  */
-@WebServlet("/panier")
-public class PanierServlet extends HttpServlet {
+@WebServlet("/deleteProduct")
+public class DeleteProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public PanierServlet() {
+	public DeleteProduct() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -29,10 +30,15 @@ public class PanierServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Panier panier = (Panier) session.getAttribute("panier");
-		request.setAttribute("prixTotalPanier", panier.prixTotalPanier());
-		request.setAttribute("cart", panier.findAll());
-		getServletContext().getRequestDispatcher("/WEB-INF/produit/panier.jsp").forward(request, response);
+		int id = Integer.parseInt((String) request.getParameter("idObject"));
+		System.out.println(id);
+
+		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
+		Produit produit = serviceProduit.findById(id);
+		serviceProduit.remove(produit);
+		session.removeAttribute("serviceProduit");
+		session.setAttribute("serviceProduit", serviceProduit);
+		response.sendRedirect("home");
 	}
 
 	/**
@@ -42,8 +48,7 @@ public class PanierServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-		
+
 	}
 
 }

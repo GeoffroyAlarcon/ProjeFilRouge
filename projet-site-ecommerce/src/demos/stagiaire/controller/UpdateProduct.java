@@ -13,16 +13,16 @@ import demos.stagiaire.model.Seller;
 import demos.stagiaire.service.ServiceProduit;
 
 /**
- * Servlet implementation class AjoutProduitServlet
+ * Servlet implementation class UpdateProduct
  */
-@WebServlet("/ajoutProduit")
-public class AjoutProduitServlet extends HttpServlet {
+@WebServlet("/updateProduct")
+public class UpdateProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AjoutProduitServlet() {
+	public UpdateProduct() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,7 +34,12 @@ public class AjoutProduitServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-			getServletContext().getRequestDispatcher("/WEB-INF/vendeur/ajoutProduit.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		int idProduit = Integer.parseInt((String) request.getParameter("idObject"));
+		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
+		Produit produit = serviceProduit.findById(idProduit);
+		session.setAttribute("produit", produit);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/produit/updateProduct.jsp").forward(request, response);
 	}
 
 	/**
@@ -46,19 +51,20 @@ public class AjoutProduitServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String designation = request.getParameter("designation");
+		Produit produitRec = (Produit) session.getAttribute("produit");
+		int id = produitRec.getId();
+		System.out.println(id);
 		float prixUnitaire = Float.parseFloat(request.getParameter("prixUnitaire"));
 		int quantiteStock = Integer.parseInt(request.getParameter("quantiteStock"));
 		String imageURL = request.getParameter("imageURL");
 		String description = request.getParameter("description");
 		Seller vendeur = (Seller) session.getAttribute("vendeur");
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		Produit produit = new Produit(5, designation, prixUnitaire, quantiteStock, vendeur, imageURL, description
-				);
-		serviceProduit.addProcduct(produit);
+		Produit produit = new Produit(5, designation, prixUnitaire, quantiteStock, vendeur, imageURL, description);
+		serviceProduit.updateOne(id, produit);
 		session.removeAttribute("serviceProduit");
 		session.setAttribute("serviceProduit", serviceProduit);
 		response.sendRedirect("home");
-
 	}
 
 }

@@ -23,30 +23,39 @@
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-9 text-center">
+			<div class="col-lg-3 text-center">
+				<h3>Peluche :</h3>
 				<p>
-					Nom du Produit
 					<c:out value="${produit.designation }" />
 				</p>
+			</div>
+			<div class="col-lg-4">
 				<img src=" ${produit.imageURL }" alt="" />
+
+			</div>
+			<div class="col-lg-2">
+				<h3>Prix :</h3>
 				<p>
-					prix :
 					<c:out value="${produit.prixUnitaire } euros "></c:out>
 				</p>
+			</div>
+
+			<div class="col-lg-3">
+				<h3>Description :</h3>
 				<p>
-					couleur :
-					<c:forEach items="${produit.couleur}" var="x">
-						<p>
-							<c:out value="${x}"></c:out>
-						</p>
-					</c:forEach>
-				</p>
-				<p>
-					Description :
+
 					<c:out value="${produit.description }"></c:out>
 				</p>
 			</div>
-			<div class="col-lg-3">
+		</div>
+
+
+		<div class="row bg-dark text-white text-center">
+
+			<div class="col-lg-12">Passez commande</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
 				<form action="pageProduit" method="post">
 					<div class="form-group">
 						<label for="quantite"> quantité choisie :</label> <select
@@ -57,22 +66,15 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="couleur"> Couleur :</label> <select name="couleur"
-							id="couleur">
-							<c:forEach items="${produit.couleur}" var="couleur">
-								<option value=" ${couleur}">${couleur}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<div class="form-group">
 						<input class="btn btn-primary" type="submit"
 							value="Ajouter au panier" />
 					</div>
-					  <c:set var="test" value="${id}" scope="request" />
+					<c:set var="test" value="${id}" scope="request" />
 				</form>
 			</div>
-
 		</div>
 	</div>
+
+
 </body>
 </html>
