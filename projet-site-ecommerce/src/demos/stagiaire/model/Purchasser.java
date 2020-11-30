@@ -3,16 +3,47 @@ package demos.stagiaire.model;
 public class Purchasser extends User {
 	private String carteBancaire;
 	private String numeroTel;
-	private String identite;
+	private String nom;
+	private String prenom;
 	private Adresse adresse;
 
-	public Purchasser(int id, String email, String passeword, String carteBancaire, String numeroTel, String identite,
-			Adresse adresse) {
-		super(id, email, passeword);
+
+	/**
+	 * @param id
+	 * @param email
+	 * @param password
+	 * @param carteBancaire
+	 * @param numeroTel
+	 * @param nom
+	 * @param prenom
+	 * @param adresse
+	 */
+	public Purchasser(int id, String email, String password, String carteBancaire, String numeroTel, String nom,
+			String prenom, Adresse adresse) {
+		super(id, email, password);
 		this.carteBancaire = carteBancaire;
 		this.numeroTel = numeroTel;
-		this.identite = identite;
+		this.nom = nom;
+		this.prenom = prenom;
 		this.adresse = adresse;
+	}
+
+	/**
+	 * @param id
+	 * @param email
+	 * @param password
+	 */
+	public Purchasser(int id) {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param email
+	 * @param password
+	 */
+	public Purchasser(String email, String password) {
+		super(email, password);
+		// TODO Auto-generated constructor stub
 	}
 
 	public Purchasser() {
@@ -35,12 +66,22 @@ public class Purchasser extends User {
 		this.numeroTel = numeroTel;
 	}
 
-	public String getIdentite() {
-		return identite;
+	
+
+	public String getNom() {
+		return nom;
 	}
 
-	public void setIdentite(String identite) {
-		this.identite = identite;
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
 	public Adresse getAdresse() {
@@ -53,8 +94,8 @@ public class Purchasser extends User {
 
 	@Override
 	public String toString() {
-		return "Acheteur [carteBancaire=" + carteBancaire + ", numeroTel=" + numeroTel + ", identite=" + identite
-				+ ", adresse=" + adresse + ", toString()=" + super.toString() + "]";
+		return "Purchasser [carteBancaire=" + carteBancaire + ", numeroTel=" + numeroTel + ", nom=" + nom + ", prenom="
+				+ prenom + ", adresse=" + adresse + "]";
 	}
 
 

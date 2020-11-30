@@ -12,6 +12,16 @@ public class User {
 		this.password = password;
 	}
 
+	/**
+	 * @param email
+	 * @param password
+	 */
+	public User(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
+
 	public User() {
 		super();
 
