@@ -21,14 +21,16 @@ import demos.stagiaire.service.ServiceCommande;
 import demos.stagiaire.service.ServiceProduit;
 
 /**
- * Servlet implementation class PannierServlet
+ * Servlet implementation class ConfirmationCommande
  */
-@WebServlet("/panier")
-public class PanierServlet extends HttpServlet {
+@WebServlet("/confirmationCommande")
+public class ConfirmationCommande extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ServiceCommande serviceCommande = new ServiceCommande();
 
-	public PanierServlet() {
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ConfirmationCommande() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -39,12 +41,22 @@ public class PanierServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		ServiceCommande serviceCommande = new ServiceCommande();
 		HttpSession session = request.getSession();
+		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
+		Date datescommande = new Date();
 		Panier panier = (Panier) session.getAttribute("panier");
-		request.setAttribute("prixTotalPanier", panier.prixTotalPanier());
-		request.setAttribute("cart", panier.findAll());
-
-		getServletContext().getRequestDispatcher("/WEB-INF/produit/panier.jsp").forward(request, response);
+		ArrayList<LigneCommandePanierProduit> allProducts = panier.findAll();
+		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
+		// boucle pour stocker les commandes qui ont abouti
+		for (LigneCommandePanierProduit ligne : allProducts) {
+			Produit produit = ligne.getProduit();
+			int quantiteCommandee = ligne.getQuantiteCommandee();
+Commande	commande =(Commande) session.getAttribute("commande");
+			LigneCommande ligneCommande = new LigneCommande(2, quantiteCommandee, commande, produit);
+			serviceCommande.addProcduct(ligneCommande);
+		}
+		session.setAttribute("serviceCommande", serviceCommande);
 	}
 
 	/**
@@ -53,24 +65,8 @@ public class PanierServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
-		Date datescommande = new Date();
-		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		Panier panier = (Panier) session.getAttribute("panier");
-		ArrayList<LigneCommandePanierProduit> allProduct = panier.findAll();
-		for (LigneCommandePanierProduit ligne : allProduct) {
-			Produit produit = ligne.getProduit();
-			int quantitecommandee = ligne.getQuantiteCommandee();
-			produit.setQuantiteStock(produit.getQuantiteStock() - quantitecommandee);
-			int id = produit.getId();
-			serviceProduit.updateOne(id, produit);
-		}
-		Commande commande = new Commande(22, datescommande, acheteur);
-		session.setAttribute("serviceProduit", serviceProduit);
-		session.setAttribute("commande", commande);
-		session.setAttribute("serviceCommande", serviceCommande);
-
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

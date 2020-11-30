@@ -13,6 +13,25 @@ public class Seller extends User {
 	}
 	
 
+	public Seller(String email, String password, String nomCompagnie, String siret) {
+		super(email, password);
+		this.nomCompagnie = nomCompagnie;
+		this.siret = siret;
+	}
+
+
+	public Seller(int id) {
+		super(id);
+	}
+
+
+	public Seller(int id, String email, String password, String nomCompagnie, String siret) {
+		super(id, email, password);
+		this.nomCompagnie = nomCompagnie;
+		this.siret = siret;
+	}
+
+
 	public Seller() {
 		super();
 	}

@@ -17,11 +17,16 @@ selectUser.addEventListener('input', function() {
 		let labelTel = document.createElement("label");
 		let inputTel = document.createElement("input");
 		inputTel.name = "tel"
-		let divIdentite = document.createElement("div");
-		divIdentite.className = "form-group";
-		let labelIdentite = document.createElement("label");
-		let inputIdentite = document.createElement("input");
-		inputIdentite.name = "identite";
+		let divNom = document.createElement("div");
+		divNom.className = "form-group";
+		let labelNom = document.createElement("label");
+		let inputNom = document.createElement("input");
+		inputNom.name = "nom";
+		let divPrenom = document.createElement("div");
+		divPrenom.className = "form-group";
+		let labelPrenom = document.createElement("label");
+		let inputPrenom = document.createElement("input");
+		inputPrenom.name = "prenom";
 		let divRue = document.createElement("div");
 		divRue.className = "form-group";
 		let labelRue = document.createElement("label");
@@ -48,8 +53,10 @@ selectUser.addEventListener('input', function() {
 		formUser.appendChild(divCb).appendChild(inputCb);
 		formUser.appendChild(divTel).appendChild(labelTel).innerHTML = " Rentrez votre numéro de carte de téléphone";
 		formUser.appendChild(divTel).appendChild(inputTel);
-		formUser.appendChild(divIdentite).appendChild(labelIdentite).innerHTML = " Rentrez votre identifiant";
-		formUser.appendChild(divIdentite).appendChild(inputIdentite);
+		formUser.appendChild(divNom).appendChild(labelNom).innerHTML = " Rentrez votre nom de Famille";
+		formUser.appendChild(divNom).appendChild(inputNom);
+		formUser.appendChild(divPrenom).appendChild(labelPrenom).innerHTML = " Rentrez votre prénom";
+		formUser.appendChild(divPrenom).appendChild(inputPrenom);
 		formUser.appendChild(divRue).appendChild(labelRue).innerHTML = " Rentrez le Nom de Votre rue";
 		formUser.appendChild(divRue).appendChild(inputRue);
 		formUser.appendChild(divCodePostal).appendChild(labelCodePostal).innerHTML = " Rentrez votre code Postal";

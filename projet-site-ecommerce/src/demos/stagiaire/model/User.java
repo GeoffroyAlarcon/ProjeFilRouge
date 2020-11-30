@@ -22,6 +22,11 @@ public class User {
 		this.password = password;
 	}
 
+	public User(int id) {
+		super();
+		this.id = id;
+	}
+
 	public User() {
 		super();
 

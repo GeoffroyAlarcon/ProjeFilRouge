@@ -58,10 +58,10 @@ public class ServiceUtilisateur {
 		return tableauDAcheteur.findById(id);
 	}
 
-	//public Purchasser findByLoginPurchasser(String email, String password) {
-	//return tableauDAcheteur
+	public Purchasser findByLoginPurchasser(String email, String password) {
+	return tableauDAcheteur.findByloginAndPasseword(email, password);
 
-	//}
+	}
 
 	public Seller findByLoginSeller(String email, String password) {
 		for (int i = 0; i < tableauDeVendeur.size(); i++) {

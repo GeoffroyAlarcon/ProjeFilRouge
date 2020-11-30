@@ -28,6 +28,16 @@ public class Purchasser extends User {
 		this.adresse = adresse;
 	}
 
+	public Purchasser(String email, String password, String carteBancaire, String numeroTel, String nom, String prenom,
+			Adresse adresse) {
+		super(email, password);
+		this.carteBancaire = carteBancaire;
+		this.numeroTel = numeroTel;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+	}
+
 	/**
 	 * @param id
 	 * @param email

@@ -52,12 +52,13 @@ public class AddUserServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			String carteBancaire = request.getParameter("cb");
 			String numeroTel = request.getParameter("tel");
-			String identite = request.getParameter("identite");
+			String nom = request.getParameter("nom");
+			String prenom = request.getParameter("prenom");
 			String nomRue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
 			Adresse adresse = new Adresse(nomRue, codePostal, ville);
-			Purchasser acheteur = new Purchasser(1, email, password, carteBancaire, numeroTel, identite, adresse);
+			Purchasser acheteur = new Purchasser( email, password, carteBancaire, numeroTel, nom,prenom, adresse);
 			serviceUtilisateur.addPurchaser(acheteur);
 			HttpSession session = request.getSession();
 			session.setAttribute("id", acheteur.getId());

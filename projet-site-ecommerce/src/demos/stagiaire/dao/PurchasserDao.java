@@ -37,7 +37,7 @@ public class PurchasserDao implements Dao<Purchasser> {
 				ps.setInt(4, purchasser.getId());
 				ps.setInt(5, purchasser.getAdresse().getId());
 				ps.setString(6, purchasser.getNumeroTel());
-
+				ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -46,9 +46,21 @@ public class PurchasserDao implements Dao<Purchasser> {
 	}
 
 	@Override
-	public void remove(Purchasser t) {
-	
+	public void remove(Purchasser acheteur) {
+			Connection c = MyConnection.getConnection();
+			if (c != null) {
+				try {
+					String request = "DELETE FROM acheteur WHERE utilisateurID = ?;";
+					PreparedStatement ps = c.prepareStatement(request);
+					ps.setInt(1, acheteur.getId());
+					ps.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
 		}
+		
 	
 
 
