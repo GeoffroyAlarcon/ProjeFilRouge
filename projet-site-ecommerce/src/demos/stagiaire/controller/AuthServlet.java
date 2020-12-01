@@ -58,7 +58,7 @@ public class AuthServlet extends HttpServlet {
 		Seller vendeur = serviceUtilisateur.findByLoginSeller(email, password);
 		session.setAttribute("serviceProduit", serviceProduit);
 		if (request.getServletPath().contains("authPurchasser") && acheteur != null) {
-			Panier panier = new Panier(acheteur);
+		Panier panier = new Panier();
 			session.setAttribute("acheteur", acheteur);
 			session.setAttribute("panier", panier);
 			session.setAttribute("serviceUser", serviceUtilisateur);

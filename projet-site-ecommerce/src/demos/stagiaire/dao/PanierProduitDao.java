@@ -78,13 +78,14 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 					Product produit = productDao.findById(idProduct);
 					LigneCommandePanierProduit ligne = new LigneCommandePanierProduit(id, quantiteCommandee, produit);
 					lignes.add(ligne);
-					return lignes;
 				}
+				return lignes;
+		
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-
-	}
+		return null;
+}
 }

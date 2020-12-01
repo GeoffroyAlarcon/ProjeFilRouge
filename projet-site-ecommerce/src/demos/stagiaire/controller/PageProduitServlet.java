@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import demos.stagiaire.dao.PanierProduitDao;
 import demos.stagiaire.model.LigneCommande;
 import demos.stagiaire.model.LigneCommandePanierProduit;
+import demos.stagiaire.model.LignePanier;
 import demos.stagiaire.model.Panier;
 import demos.stagiaire.model.Product;
 import demos.stagiaire.model.Purchasser;
@@ -22,7 +24,7 @@ import demos.stagiaire.service.ServiceProduit;
 @WebServlet("/pageProduit")
 public class PageProduitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private PanierProduitDao panierProduitDao = new PanierProduitDao();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -47,7 +49,7 @@ public class PageProduitServlet extends HttpServlet {
 		session.setAttribute("produit", produit);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/produit/pageProduit.jsp").forward(request, response);
 
-			}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -63,7 +65,8 @@ public class PageProduitServlet extends HttpServlet {
 		int quantiteCommandee = Integer.parseInt(request.getParameter("quantite"));
 		LigneCommandePanierProduit ligneCommandePanierProduit = new LigneCommandePanierProduit(1, quantiteCommandee,
 				produit);
-
+		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
+		LignePanier lignePanier = new LignePanier(ligneCommandePanierProduit, acheteur);
 		if (produit.getQuantiteStock() < ligneCommandePanierProduit.getQuantiteCommandee()) {
 			System.err.println("la quantité commandée est suppérieure à la quantité en stock !");
 			this.getServletContext().getRequestDispatcher("/WEB-INF/produit/pageProduit.jsp").forward(request,
@@ -71,7 +74,8 @@ public class PageProduitServlet extends HttpServlet {
 
 		} else {
 			produit.setQuantiteStock(produit.getQuantiteStock() - ligneCommandePanierProduit.getQuantiteCommandee());
-			panier.addInCart(ligneCommandePanierProduit);
+			panierProduitDao.save(ligneCommandePanierProduit);
+			panier.add(lignePanier);
 			response.sendRedirect("panier");
 		}
 	}
