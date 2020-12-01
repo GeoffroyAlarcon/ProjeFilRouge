@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import demos.stagiaire.model.Adresse;
 import demos.stagiaire.model.Purchasser;
 import demos.stagiaire.model.Seller;
@@ -30,7 +29,7 @@ public class SellerDao implements Dao<Seller> {
 					seller.setId(resultat.getInt(1));
 				}
 
-				ps = c.prepareStatement("insert into vendeur (nomCompagnie,siret,utilisateurID), value (?,?,?);",
+				ps = c.prepareStatement("insert into vendeur (nomCompagnie,siret,utilisateurID)  value (?,?,?);",
 						PreparedStatement.RETURN_GENERATED_KEYS);
 				ps.setString(1, seller.getNomCompagnie());
 				ps.setString(2, seller.getSiret());
@@ -56,7 +55,6 @@ public class SellerDao implements Dao<Seller> {
 				e.printStackTrace();
 			}
 		}
-
 
 	}
 
@@ -93,13 +91,11 @@ public class SellerDao implements Dao<Seller> {
 		return null;
 	}
 
-
-
 	public Seller findByloginAndPasseword(String email, String password) {
 		Connection c = MyConnection.getConnection();
 		if (c != null) {
 			try {
-				String request = "select * from vendeur inner join join  utilisateur on utilisateur.utilisateurID = vendeur.utilisateurID where password = ? and email  = ?;";
+				String request = "select * from vendeur inner join  utilisateur on utilisateur.utilisateurID = vendeur.utilisateurID where  email  = ?  and password = ?;";
 				PreparedStatement ps = c.prepareStatement(request);
 				ps.setString(1, email);
 				ps.setString(2, password);
@@ -108,7 +104,7 @@ public class SellerDao implements Dao<Seller> {
 					int id = result.getInt("utilisateurID");
 					String nomCompagnie = result.getString("nomCompagnie");
 					String siret = result.getString("siret");
-					Seller vendeur = new Seller(id,email, password, nomCompagnie, siret);
+					Seller vendeur = new Seller(id, email, password, nomCompagnie, siret);
 					return vendeur;
 				} else {
 					return null;
@@ -136,7 +132,7 @@ public class SellerDao implements Dao<Seller> {
 					String password = result.getString("password");
 					String nomCompagnie = result.getString("nomCompagnie");
 					String siret = result.getString("siret");
-					Seller vendeur = new Seller(id,email, password, nomCompagnie, siret);
+					Seller vendeur = new Seller(id, email, password, nomCompagnie, siret);
 					sellers.add(vendeur);
 				}
 				return sellers;

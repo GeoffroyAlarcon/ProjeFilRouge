@@ -78,11 +78,6 @@ selectUser.addEventListener('input', function() {
 		let inputSiret = document.createElement("input");
 		inputSiret.name = "siret";
 		divSiret.className = "form-group";
-		let divDescription = document.createElement("div");
-		let labelDescription = document.createElement("label");
-		let inputDescription = document.createElement("input");
-		inputDescription.name = "description";
-		divDescription.className = "form-group";
 		let divSubmit = document.createElement("div");
 		divSubmit.className = "form-group";
 		let inputSubmit = document.createElement("input");
@@ -93,8 +88,6 @@ selectUser.addEventListener('input', function() {
 		formUser.appendChild(divCompagnie).appendChild(inputCompagnie);
 		formUser.appendChild(divSiret).appendChild(labelSiret).innerHTML = " Rentrez Votre numéro de Siret";
 		formUser.appendChild(divSiret).appendChild(inputSiret);
-		formUser.appendChild(divDescription).appendChild(labelDescription).innerHTML = " Rentrez la description  de votre Compagnie";
-		formUser.appendChild(divDescription).appendChild(inputDescription);
 		formUser.appendChild(divSubmit).appendChild(inputSubmit);
 	}
 

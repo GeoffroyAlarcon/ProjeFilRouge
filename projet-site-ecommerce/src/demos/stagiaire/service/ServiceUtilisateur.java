@@ -3,6 +3,7 @@ package demos.stagiaire.service;
 import java.util.ArrayList;
 
 import demos.stagiaire.dao.PurchasserDao;
+import demos.stagiaire.dao.SellerDao;
 import demos.stagiaire.model.Adresse;
 import demos.stagiaire.model.Purchasser;
 
@@ -11,31 +12,25 @@ import demos.stagiaire.model.Seller;
 public class ServiceUtilisateur {
 
 	private PurchasserDao tableauDAcheteur = new PurchasserDao();
-	private ArrayList<Seller> tableauDeVendeur = new ArrayList<Seller>();
+	private SellerDao tableauDeVendeur = new SellerDao();
 
 	public ServiceUtilisateur() {
 	}
-
-	
 
 	public PurchasserDao getTableauDAcheteur() {
 		return tableauDAcheteur;
 	}
 
-
-
-	public void setTableauDAcheteur(PurchasserDao tableauDAcheteur) {
-		this.tableauDAcheteur = tableauDAcheteur;
-	}
-
-
-
-	public ArrayList<Seller> getTableauDeVendeur() {
+	public SellerDao getTableauDeVendeur() {
 		return tableauDeVendeur;
 	}
 
-	public void setTableauDeVendeur(ArrayList<Seller> tableauDeVendeur) {
+	public void setTableauDeVendeur(SellerDao tableauDeVendeur) {
 		this.tableauDeVendeur = tableauDeVendeur;
+	}
+
+	public void setTableauDAcheteur(PurchasserDao tableauDAcheteur) {
+		this.tableauDAcheteur = tableauDAcheteur;
 	}
 
 	public Purchasser addPurchaser(Purchasser acheteur) {
@@ -43,7 +38,7 @@ public class ServiceUtilisateur {
 	}
 
 	public void addSeller(Seller vendeur) {
-		tableauDeVendeur.add(vendeur);
+		tableauDeVendeur.save(vendeur);
 	}
 
 	public void removePurchaser(Purchasser acheteur) {
@@ -59,47 +54,24 @@ public class ServiceUtilisateur {
 	}
 
 	public Purchasser findByLoginPurchasser(String email, String password) {
-	return tableauDAcheteur.findByloginAndPasseword(email, password);
+		return tableauDAcheteur.findByloginAndPasseword(email, password);
 
 	}
 
 	public Seller findByLoginSeller(String email, String password) {
-		for (int i = 0; i < tableauDeVendeur.size(); i++) {
-			Seller findSeller = tableauDeVendeur.get(i);
-			if (email.equals(findSeller.getEmail()) && password.equals(findSeller.getPassword())) {
-				return tableauDeVendeur.get(i);
-			}
-
-		}
-		return null;
-
+		return tableauDeVendeur.findByloginAndPasseword(email, password);
 	}
 
 	public Seller findByIdSeller(int id) {
-		for (int i = 0; i < tableauDeVendeur.size(); i++) {
-			Seller findDeVendeurById = tableauDeVendeur.get(i);
-			if (id == findDeVendeurById.getId()) {
-				return tableauDeVendeur.get(i);
-			}
-
-		}
-		return null;
-
+		return tableauDeVendeur.findById(id);
 	}
 
-	public Purchasser update( Purchasser purchasser) {
+	public Purchasser update(Purchasser purchasser) {
 		return tableauDAcheteur.update(purchasser);
 	}
 
-	public void updateOne(int id, Seller seller) {
-		for (int i = 0; i < tableauDeVendeur.size(); i++) {
-			Seller findVendeurById = tableauDeVendeur.get(i);
-			if (id == findVendeurById.getId()) {
-				tableauDeVendeur.remove(findVendeurById);
-				tableauDeVendeur.add(seller);
-			}
-
-		}
+	public Seller updateOne(int id, Seller seller) {
+	return tableauDeVendeur.update(seller);
 
 	}
 
@@ -109,7 +81,7 @@ public class ServiceUtilisateur {
 	}
 
 	public ArrayList<Seller> findallSeller() {
-		return tableauDeVendeur;
+		return tableauDeVendeur.findAll();
 	}
 
 	@Override

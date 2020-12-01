@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import demos.stagiaire.model.Adresse;
 import demos.stagiaire.model.Purchasser;
 import demos.stagiaire.model.Seller;
+import demos.stagiaire.service.ServiceProduit;
 import demos.stagiaire.service.ServiceUtilisateur;
 
 /**
@@ -20,6 +21,7 @@ import demos.stagiaire.service.ServiceUtilisateur;
 public class AddUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
+	private ServiceProduit serviceProduit = new ServiceProduit();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -58,7 +60,7 @@ public class AddUserServlet extends HttpServlet {
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
 			Adresse adresse = new Adresse(nomRue, codePostal, ville);
-			Purchasser acheteur = new Purchasser( email, password, carteBancaire, numeroTel, nom,prenom, adresse);
+			Purchasser acheteur = new Purchasser(email, password, carteBancaire, numeroTel, nom, prenom, adresse);
 			serviceUtilisateur.addPurchaser(acheteur);
 			HttpSession session = request.getSession();
 			session.setAttribute("id", acheteur.getId());
@@ -70,14 +72,14 @@ public class AddUserServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			String nomCompagnie = request.getParameter("compagnie");
 			String siret = request.getParameter("siret");
-			String description = request.getParameter("description");
-			Seller vendeur = new Seller(1, email, password, nomCompagnie, siret, description);
+			Seller vendeur = new Seller( email, password, nomCompagnie, siret);
 			HttpSession session = request.getSession();
 			serviceUtilisateur.addSeller(vendeur);
 			session.setAttribute("id", vendeur.getId());
 			session.setAttribute("serviceUser", serviceUtilisateur);
+			session.setAttribute("serviceProduit", serviceProduit);
 			response.sendRedirect("home");
-			
+
 		}
 	}
 

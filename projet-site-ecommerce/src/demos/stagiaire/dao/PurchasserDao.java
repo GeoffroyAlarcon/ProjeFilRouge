@@ -24,12 +24,27 @@ public class PurchasserDao implements Dao<Purchasser> {
 				ps.setString(1, purchasser.getEmail());
 				ps.setString(2, purchasser.getPassword());
 				ps.executeUpdate();
+			
+				
 				ResultSet resultat = ps.getGeneratedKeys();
 				if (resultat.next()) {
 					purchasser.setId(resultat.getInt(1));
 				}
+				 ps = c.prepareStatement("insert into adresse (adresse,ville,codePostale) values (?,?,?); ",
+						PreparedStatement.RETURN_GENERATED_KEYS);
+				ps.setString(1, purchasser.getAdresse().getNomRue());
+				ps.setString(2, purchasser.getAdresse().getVille());
+				ps.setString(3, purchasser.getAdresse().getCodePostal());
+				ps.executeUpdate();
+			 resultat = ps.getGeneratedKeys();
+			 if (resultat.next()) {
+					purchasser.getAdresse().setId(resultat.getInt(1));
+				}
+				
+				
+				
 				ps = c.prepareStatement(
-						"insert into acheteur (carteBancaire,nom,prenom,utilisateurID,AdresseID,numeroTel), value ?,?,?,?,?,?);",
+						"insert into acheteur (carteBancaire,nom,prenom,utilisateurID,AdresseID,numeroTel)  value (?,?,?,?,?,?);",
 						PreparedStatement.RETURN_GENERATED_KEYS);
 				ps.setString(1, purchasser.getCarteBancaire());
 				ps.setString(2, purchasser.getNom());
@@ -112,8 +127,9 @@ public class PurchasserDao implements Dao<Purchasser> {
 		Connection c = MyConnection.getConnection();
 		if (c != null) {
 			try {
-				String request = "select * from acheteur inner join adresse on acheteur.adresseID = adresse.adresseID inner join  utilisateur on utilisateur.utilisateurID = acheteur.utilisateurID where password = ? and email  = ?;";
+				String request = "select * from acheteur inner join adresse on acheteur.adresseID = adresse.adresseID inner join  utilisateur on utilisateur.utilisateurID = acheteur.utilisateurID where  email  = ? and password = ?;";
 				PreparedStatement ps = c.prepareStatement(request);
+				System.out.println("hello world !");
 				ps.setString(1, email);
 				ps.setString(2, password);
 				ResultSet result = ps.executeQuery();
