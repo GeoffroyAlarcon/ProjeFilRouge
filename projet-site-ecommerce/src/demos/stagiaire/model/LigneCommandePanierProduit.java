@@ -13,6 +13,12 @@ public class LigneCommandePanierProduit {
 
 	}
 
+	public LigneCommandePanierProduit(int quantiteCommandee, Product produit) {
+		super();
+		this.quantiteCommandee = quantiteCommandee;
+		this.produit = produit;
+	}
+
 	public LigneCommandePanierProduit() {
 		super();
 	}

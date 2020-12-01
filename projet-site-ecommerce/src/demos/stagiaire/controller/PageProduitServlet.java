@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import demos.stagiaire.dao.PanierProduitDao;
+import demos.stagiaire.dao.ProductDao;
 import demos.stagiaire.model.LigneCommande;
 import demos.stagiaire.model.LigneCommandePanierProduit;
 import demos.stagiaire.model.LignePanier;
@@ -25,6 +26,7 @@ import demos.stagiaire.service.ServiceProduit;
 public class PageProduitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PanierProduitDao panierProduitDao = new PanierProduitDao();
+	private ProductDao productDao = new ProductDao();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -63,7 +65,7 @@ public class PageProduitServlet extends HttpServlet {
 		Product produit = (Product) session.getAttribute("produit");
 		Panier panier = (Panier) session.getAttribute("panier");
 		int quantiteCommandee = Integer.parseInt(request.getParameter("quantite"));
-		LigneCommandePanierProduit ligneCommandePanierProduit = new LigneCommandePanierProduit(1, quantiteCommandee,
+		LigneCommandePanierProduit ligneCommandePanierProduit = new LigneCommandePanierProduit( quantiteCommandee,
 				produit);
 		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
 		LignePanier lignePanier = new LignePanier(ligneCommandePanierProduit, acheteur);
@@ -74,6 +76,7 @@ public class PageProduitServlet extends HttpServlet {
 
 		} else {
 			produit.setQuantiteStock(produit.getQuantiteStock() - ligneCommandePanierProduit.getQuantiteCommandee());
+			productDao.update(produit);
 			panierProduitDao.save(ligneCommandePanierProduit);
 			panier.add(lignePanier);
 			response.sendRedirect("panier");

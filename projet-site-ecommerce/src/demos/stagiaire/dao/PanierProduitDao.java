@@ -20,7 +20,7 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 		if (c != null) {
 			try {
 				PreparedStatement ps = c.prepareStatement(
-						"insert into produitPanier (quantiteCommandee,produitID,) values (?,?); ",
+						"insert into produitPanier (quantiteCommandee,produitID) values (?,?); ",
 						PreparedStatement.RETURN_GENERATED_KEYS);
 				ps.setInt(1, ligne.getQuantiteCommandee());
 				ps.setInt(2, ligne.getProduit().getId());
