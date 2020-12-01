@@ -2,94 +2,66 @@ package demos.stagiaire.service;
 
 import java.util.ArrayList;
 
-import demos.stagiaire.model.Produit;
+import demos.stagiaire.dao.ProductDao;
+import demos.stagiaire.model.Product;
 import demos.stagiaire.model.Seller;
 
 public class ServiceProduit {
-	private ArrayList<Produit> tableauDeProduit = new ArrayList<Produit>();
+	private ProductDao tableauDeProduit = new ProductDao() ;
 
 	public ServiceProduit() {
-
-		tableauDeProduit.add(new Produit(1, "Garfunkel", 25, 2, new Seller(),
-				"https://lagranderecre-lagranderecre-fr-storage.omn.proximis.com/Imagestorage/imagesSynchro/0/0/c6037e6e50767e22233191637bafe63a103b4da9_IMG-PRODUCT-847442-1.jpeg",
-				"lorem ipsum", new String[] { "bleu", "beige" }));
-		tableauDeProduit.add(new Produit(2, "Eliot", 25, 10, new Seller(),
-				"https://lagranderecre-lagranderecre-fr-storage.omn.proximis.com/Imagestorage/imagesSynchro/0/0/c6037e6e50767e22233191637bafe63a103b4da9_IMG-PRODUCT-847442-1.jpeg",
-				"lorem ipsum", new String[] { "bleu", "beige" }));
-		tableauDeProduit.add(new Produit(3, "Lenny", 25, 10, new Seller(),
-				"https://lagranderecre-lagranderecre-fr-storage.omn.proximis.com/Imagestorage/imagesSynchro/0/0/c6037e6e50767e22233191637bafe63a103b4da9_IMG-PRODUCT-847442-1.jpeg",
-				"lorem ipsum", new String[] { "bleu", "beige" }));
-		tableauDeProduit.add(new Produit(4, "Karl", 25, 10, new Seller(),
-				"https://lagranderecre-lagranderecre-fr-storage.omn.proximis.com/Imagestorage/imagesSynchro/0/0/c6037e6e50767e22233191637bafe63a103b4da9_IMG-PRODUCT-847442-1.jpeg",
-				"lorem ipsum", new String[] { "bleu", "beige" }));
 	}
 
-	public ArrayList<Produit> getTableauDeProduit() {
+	
+	
+	public ProductDao getTableauDeProduit() {
 		return tableauDeProduit;
 	}
 
-	public void setTableauDeProduit() {
+
+
+	public void setTableauDeProduit(ProductDao tableauDeProduit) {
+		this.tableauDeProduit = tableauDeProduit;
 	}
 
-	public void addProcduct(Produit produit) {
-		tableauDeProduit.add(produit);
+
+
+	public Product addProcduct(Product product) {
+	return	tableauDeProduit.save(product);
 
 	}
 
-	public void remove(Produit produit) {
+	public void remove(Product produit) {
 		tableauDeProduit.remove(produit);
 	}
 
-	public Produit findById(int id) {
-		for (int i = 0; i < tableauDeProduit.size(); i++) {
-			Produit findProduitById = tableauDeProduit.get(i);
-			if (id == findProduitById.getId()) {
-				return tableauDeProduit.get(i);
-			}
-
-		}
-		return null;
+	public Product findById(int id) {
+		return tableauDeProduit.findById(id);
 
 	}
 
-	public void updateOne(int id, Produit produit) {
-		for (int i = 0; i < tableauDeProduit.size(); i++) {
-			Produit findProduitById = tableauDeProduit.get(i);
-			if (id == findProduitById.getId()) {
-				tableauDeProduit.remove(findProduitById);
-				tableauDeProduit.add(produit);
-			}
-
-		}
-
+	public Product updateOne(int id, Product product) {
+		return tableauDeProduit.update(product);
 	}
 
-	public ArrayList<Produit> findAll() {
-		return tableauDeProduit;
+	public ArrayList<Product> findAll() {
+		return tableauDeProduit.findAll();
 	}
 
-	public ArrayList<Produit> findAllDisponible() {
-		for (int i = 0; i < tableauDeProduit.size(); i++) {
-			Produit verifystock = tableauDeProduit.get(i);
+	public ArrayList<Product> findAllDisponible() {
+		ArrayList<Product> productSeller = new ArrayList<Product>();
+		for (int i = 0; i < tableauDeProduit.findAll().size(); i++) {
+			Product verifystock = tableauDeProduit.findAll().get(i);
 			if (verifystock.getQuantiteStock() >= 1) {
-				return tableauDeProduit;
+				productSeller.add(verifystock);
 			}
 		}
-		return null;
+		return productSeller;
 
 	}
 
-	public ArrayList<Produit> findProductBySeller(Seller seller) {
-		ArrayList<Produit> productSeller = new ArrayList<Produit>();
-		for (Produit produit : tableauDeProduit) {
-
-			if (produit.getVendeur().equals(seller)) {
-				productSeller.add(produit);
-			}
-
-		}
-
-		return productSeller;
+	public ArrayList<Product> findProductBySeller(Seller seller) {
+		return tableauDeProduit.findProductBySeller(seller);
 
 	}
 

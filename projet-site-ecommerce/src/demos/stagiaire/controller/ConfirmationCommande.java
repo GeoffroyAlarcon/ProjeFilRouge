@@ -15,7 +15,7 @@ import demos.stagiaire.model.Commande;
 import demos.stagiaire.model.LigneCommande;
 import demos.stagiaire.model.LigneCommandePanierProduit;
 import demos.stagiaire.model.Panier;
-import demos.stagiaire.model.Produit;
+import demos.stagiaire.model.Product;
 import demos.stagiaire.model.Purchasser;
 import demos.stagiaire.service.ServiceCommande;
 import demos.stagiaire.service.ServiceProduit;
@@ -50,7 +50,7 @@ public class ConfirmationCommande extends HttpServlet {
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
 		// boucle pour stocker les commandes qui ont abouti
 		for (LigneCommandePanierProduit ligne : allProducts) {
-			Produit produit = ligne.getProduit();
+			Product produit = ligne.getProduit();
 			int quantiteCommandee = ligne.getQuantiteCommandee();
 Commande	commande =(Commande) session.getAttribute("commande");
 			LigneCommande ligneCommande = new LigneCommande(2, quantiteCommandee, commande, produit);

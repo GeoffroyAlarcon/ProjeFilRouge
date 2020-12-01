@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import demos.stagiaire.model.Produit;
+import demos.stagiaire.model.Product;
 import demos.stagiaire.service.ServiceProduit;
 
 /**
@@ -34,7 +34,7 @@ public class DeleteProduct extends HttpServlet {
 		System.out.println(id);
 
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		Produit produit = serviceProduit.findById(id);
+		Product produit = serviceProduit.findById(id);
 		serviceProduit.remove(produit);
 		session.removeAttribute("serviceProduit");
 		session.setAttribute("serviceProduit", serviceProduit);

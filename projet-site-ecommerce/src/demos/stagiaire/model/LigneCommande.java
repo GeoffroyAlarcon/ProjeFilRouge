@@ -4,9 +4,9 @@ public class LigneCommande {
 	private int id;
 	private int quantiteCommandee;
 	private Commande commande;
-	private Produit produit;
+	private Product produit;
 
-	public LigneCommande(int id, int quantiteCommandee, Commande commande, Produit produit) {
+	public LigneCommande(int id, int quantiteCommandee, Commande commande, Product produit) {
 		super();
 		this.id = id;
 		this.quantiteCommandee = quantiteCommandee;
@@ -41,11 +41,11 @@ public class LigneCommande {
 		this.commande = commande;
 	}
 
-	public Produit getProduit() {
+	public Product getProduit() {
 		return produit;
 	}
 
-	public void setProduit(Produit produit) {
+	public void setProduit(Product produit) {
 		this.produit = produit;
 	}
 

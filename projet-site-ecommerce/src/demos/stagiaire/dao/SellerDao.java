@@ -29,11 +29,13 @@ public class SellerDao implements Dao<Seller> {
 					seller.setId(resultat.getInt(1));
 				}
 
-				ps = c.prepareStatement("insert into vendeur (nomCompagnie,siret,utilisateurID)  value (?,?,?);",
+				ps = c.prepareStatement("insert into vendeur ( nomCompagnie,siret,utilisateurID,vendeurID)  value (?,?,?,?);",
 						PreparedStatement.RETURN_GENERATED_KEYS);
+				
 				ps.setString(1, seller.getNomCompagnie());
 				ps.setString(2, seller.getSiret());
 				ps.setInt(3, seller.getId());
+				ps.setInt(4, seller.getId());
 				ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -69,7 +71,7 @@ public class SellerDao implements Dao<Seller> {
 		Connection c = MyConnection.getConnection();
 		if (c != null) {
 			try {
-				String request = "select * from vendeur inner join join  utilisateur on utilisateur.utilisateurID = vendeur.utilisateurID where utilisateurID =  ?;";
+				String request = "select * from vendeur inner join  utilisateur on utilisateur.utilisateurID = vendeur.utilisateurID where vendeurID = ?;";
 				PreparedStatement ps = c.prepareStatement(request);
 				ps.setInt(1, id);
 

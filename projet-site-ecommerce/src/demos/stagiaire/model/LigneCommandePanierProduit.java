@@ -3,9 +3,9 @@ package demos.stagiaire.model;
 public class LigneCommandePanierProduit {
 	private int id;
 	private int quantiteCommandee;
-	private Produit produit;
+	private Product produit;
 
-	public LigneCommandePanierProduit(int id, int quantiteCommandee, Produit produit) {
+	public LigneCommandePanierProduit(int id, int quantiteCommandee, Product produit) {
 		super();
 		this.id = id;
 		this.quantiteCommandee = quantiteCommandee;
@@ -33,11 +33,11 @@ public class LigneCommandePanierProduit {
 		this.quantiteCommandee = quantiteCommandee;
 	}
 
-	public Produit getProduit() {
+	public Product getProduit() {
 		return produit;
 	}
 
-	public void setProduit(Produit produit) {
+	public void setProduit(Product produit) {
 		this.produit = produit;
 	}
 

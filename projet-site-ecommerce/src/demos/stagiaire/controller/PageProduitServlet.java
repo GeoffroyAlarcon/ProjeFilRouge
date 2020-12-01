@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import demos.stagiaire.model.LigneCommande;
 import demos.stagiaire.model.LigneCommandePanierProduit;
 import demos.stagiaire.model.Panier;
-import demos.stagiaire.model.Produit;
+import demos.stagiaire.model.Product;
 import demos.stagiaire.model.Purchasser;
 
 import demos.stagiaire.service.ServiceProduit;
@@ -43,7 +43,7 @@ public class PageProduitServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int idProduit = Integer.parseInt((String) request.getParameter("idObject"));
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		Produit produit = serviceProduit.findById(idProduit);
+		Product produit = serviceProduit.findById(idProduit);
 		session.setAttribute("produit", produit);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/produit/pageProduit.jsp").forward(request, response);
 
@@ -58,7 +58,7 @@ public class PageProduitServlet extends HttpServlet {
 
 		System.out.println(request.getAttribute("test"));
 		HttpSession session = request.getSession();
-		Produit produit = (Produit) session.getAttribute("produit");
+		Product produit = (Product) session.getAttribute("produit");
 		Panier panier = (Panier) session.getAttribute("panier");
 		int quantiteCommandee = Integer.parseInt(request.getParameter("quantite"));
 		LigneCommandePanierProduit ligneCommandePanierProduit = new LigneCommandePanierProduit(1, quantiteCommandee,

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import demos.stagiaire.model.Produit;
+import demos.stagiaire.model.Product;
 import demos.stagiaire.model.Seller;
 import demos.stagiaire.service.ServiceProduit;
 
@@ -52,7 +52,7 @@ public class AjoutProduitServlet extends HttpServlet {
 		String description = request.getParameter("description");
 		Seller vendeur = (Seller) session.getAttribute("vendeur");
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		Produit produit = new Produit(5, designation, prixUnitaire, quantiteStock, vendeur, imageURL, description
+		Product produit = new Product(5, designation, prixUnitaire, quantiteStock, vendeur, imageURL, description
 				);
 		serviceProduit.addProcduct(produit);
 		session.removeAttribute("serviceProduit");

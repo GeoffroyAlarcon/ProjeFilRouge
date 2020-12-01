@@ -15,7 +15,7 @@ import demos.stagiaire.model.Commande;
 import demos.stagiaire.model.LigneCommande;
 import demos.stagiaire.model.LigneCommandePanierProduit;
 import demos.stagiaire.model.Panier;
-import demos.stagiaire.model.Produit;
+import demos.stagiaire.model.Product;
 import demos.stagiaire.model.Purchasser;
 import demos.stagiaire.service.ServiceCommande;
 import demos.stagiaire.service.ServiceProduit;
@@ -60,7 +60,7 @@ public class PanierServlet extends HttpServlet {
 		Panier panier = (Panier) session.getAttribute("panier");
 		ArrayList<LigneCommandePanierProduit> allProduct = panier.findAll();
 		for (LigneCommandePanierProduit ligne : allProduct) {
-			Produit produit = ligne.getProduit();
+			Product produit = ligne.getProduit();
 			int quantitecommandee = ligne.getQuantiteCommandee();
 			produit.setQuantiteStock(produit.getQuantiteStock() - quantitecommandee);
 			int id = produit.getId();

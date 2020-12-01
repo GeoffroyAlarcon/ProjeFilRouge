@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import demos.stagiaire.model.Produit;
+import demos.stagiaire.model.Product;
 import demos.stagiaire.model.Seller;
 import demos.stagiaire.service.ServiceProduit;
 
@@ -37,7 +37,7 @@ public class UpdateProduct extends HttpServlet {
 		HttpSession session = request.getSession();
 		int idProduit = Integer.parseInt((String) request.getParameter("idObject"));
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		Produit produit = serviceProduit.findById(idProduit);
+		Product produit = serviceProduit.findById(idProduit);
 		session.setAttribute("produit", produit);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/produit/updateProduct.jsp").forward(request, response);
 	}
@@ -51,7 +51,7 @@ public class UpdateProduct extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String designation = request.getParameter("designation");
-		Produit produitRec = (Produit) session.getAttribute("produit");
+		Product produitRec = (Product) session.getAttribute("produit");
 		int id = produitRec.getId();
 		System.out.println(id);
 		float prixUnitaire = Float.parseFloat(request.getParameter("prixUnitaire"));
@@ -60,7 +60,7 @@ public class UpdateProduct extends HttpServlet {
 		String description = request.getParameter("description");
 		Seller vendeur = (Seller) session.getAttribute("vendeur");
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		Produit produit = new Produit(5, designation, prixUnitaire, quantiteStock, vendeur, imageURL, description);
+		Product produit = new Product(5, designation, prixUnitaire, quantiteStock, vendeur, imageURL, description);
 		serviceProduit.updateOne(id, produit);
 		session.removeAttribute("serviceProduit");
 		session.setAttribute("serviceProduit", serviceProduit);

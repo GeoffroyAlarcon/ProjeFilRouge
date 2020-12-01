@@ -1,6 +1,6 @@
 package demos.stagiaire.model;
 
-public class Produit {
+public class Product {
 	private int id;
 	private String designation;
 	private float prixUnitaire;
@@ -10,7 +10,7 @@ public class Produit {
 	private String description;
 	private String [] couleur;
 
-	public Produit(int id, String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
+	public Product(int id, String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
 			String description, String [] couleur) {
 		super();
 		this.id = id;
@@ -23,7 +23,7 @@ public class Produit {
 		this.couleur = couleur;
 	}
 
-	public Produit(int id, String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
+	public Product(int id, String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
 			String description) {
 		super();
 		this.id = id;
@@ -35,12 +35,12 @@ public class Produit {
 		this.description = description;
 	}
 
-	public Produit(int id) {
+	public Product(int id) {
 		super();
 		this.id = id;
 	}
 
-	public Produit() {
+	public Product() {
 		super();
 	}
 

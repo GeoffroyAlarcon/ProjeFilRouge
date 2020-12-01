@@ -2,7 +2,7 @@ package demos.stagiaire.service;
 
 import java.util.ArrayList;
 
-import demos.stagiaire.model.Produit;
+import demos.stagiaire.model.Product;
 import demos.stagiaire.model.LigneCommande;
 
 public class ServiceCommande {
