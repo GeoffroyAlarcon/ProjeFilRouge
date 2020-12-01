@@ -48,18 +48,6 @@ public class ServiceProduit {
 		return tableauDeProduit.findAll();
 	}
 
-	public ArrayList<Product> findAllDisponible() {
-		ArrayList<Product> productSeller = new ArrayList<Product>();
-		for (int i = 0; i < tableauDeProduit.findAll().size(); i++) {
-			Product verifystock = tableauDeProduit.findAll().get(i);
-			if (verifystock.getQuantiteStock() >= 1) {
-				productSeller.add(verifystock);
-			}
-		}
-		return productSeller;
-
-	}
-
 	public ArrayList<Product> findProductBySeller(Seller seller) {
 		return tableauDeProduit.findProductBySeller(seller);
 

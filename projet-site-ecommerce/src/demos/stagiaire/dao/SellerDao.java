@@ -77,6 +77,7 @@ public class SellerDao implements Dao<Seller> {
 
 				ResultSet result = ps.executeQuery();
 				if (result.next()) {
+			
 					String email = result.getString("email");
 					String password = result.getString("password");
 					String nomCompagnie = result.getString("nomCompagnie");

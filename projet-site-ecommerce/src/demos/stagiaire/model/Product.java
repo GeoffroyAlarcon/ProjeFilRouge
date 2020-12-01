@@ -8,10 +8,20 @@ public class Product {
 	private Seller vendeur;
 	private String imageURL;
 	private String description;
-	private String [] couleur;
 
+
+
+	/**
+	 * @param id
+	 * @param designation
+	 * @param prixUnitaire
+	 * @param quantiteStock
+	 * @param vendeur
+	 * @param imageURL
+	 * @param description
+	 */
 	public Product(int id, String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
-			String description, String [] couleur) {
+			String description) {
 		super();
 		this.id = id;
 		this.designation = designation;
@@ -20,13 +30,19 @@ public class Product {
 		this.vendeur = vendeur;
 		this.imageURL = imageURL;
 		this.description = description;
-		this.couleur = couleur;
 	}
 
-	public Product(int id, String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
+	/**
+	 * @param designation
+	 * @param prixUnitaire
+	 * @param quantiteStock
+	 * @param vendeur
+	 * @param imageURL
+	 * @param description
+	 */
+	public Product(String designation, float prixUnitaire, int quantiteStock, Seller vendeur, String imageURL,
 			String description) {
 		super();
-		this.id = id;
 		this.designation = designation;
 		this.prixUnitaire = prixUnitaire;
 		this.quantiteStock = quantiteStock;
@@ -102,19 +118,12 @@ public class Product {
 
 	
 
-	public String[] getCouleur() {
-		return couleur;
-	}
-
-	public void setCouleur(String[] couleur) {
-		this.couleur = couleur;
-	}
 
 	@Override
 	public String toString() {
 		return "Produit [id=" + id + ", designation=" + designation + ", prixUnitaire=" + prixUnitaire
 				+ ", quantiteStock=" + quantiteStock + ", vendeur=" + vendeur + ", imageURL=" + imageURL
-				+ ", description=" + description + ", Couleur=" + couleur + "]";
+				+ ", description=" + description ;
 	}
 
 }

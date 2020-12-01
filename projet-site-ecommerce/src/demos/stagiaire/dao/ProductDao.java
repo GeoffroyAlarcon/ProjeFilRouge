@@ -59,12 +59,33 @@ public class ProductDao implements Dao<Product> {
 	@Override
 	public Product update(Product product) {
 		// TODO Auto-generated method stub
+		Connection c = MyConnection.getConnection();
+		if (c != null) {
+			try {
+				String request = "UPDATE produit set designation = ?, quantiteStock = ? , prixUnitaire = ?, description = ?, imageURL = ?  WHERE produitID = ? ;";
+				PreparedStatement ps = c.prepareStatement(request);
+				ps.setString(1, product.getDesignation());
+				ps.setInt(2, product.getQuantiteStock());
+				ps.setFloat(3, product.getPrixUnitaire());
+				ps.setString(4, product.getDescription());
+				ps.setString(5, product.getImageURL());
+				ps.setInt(6, product.getId());
+				int nbr = ps.executeUpdate();
+				if (nbr != 0) {
+					System.out.println("test");
+					return product;
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public Product findById(int id){
-	Connection c = MyConnection.getConnection();
+	public Product findById(int id) {
+		Connection c = MyConnection.getConnection();
 		if (c != null) {
 			try {
 				SellerDao sellerDao = new SellerDao();
@@ -82,18 +103,17 @@ public class ProductDao implements Dao<Product> {
 					Seller vendeur = sellerDao.findById(idVendeur);
 					Product produit = new Product(id, designation, prixUnitaire, quantiteStock, vendeur, imageURL,
 							description);
-					return produit;	
+					return produit;
+				} else {
+					return null;
 				}
-					 else {
-							return null;
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				return null;
-
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+		}
+		return null;
+
+	}
 
 	@Override
 	public ArrayList<Product> findAll() {
@@ -128,7 +148,6 @@ public class ProductDao implements Dao<Product> {
 	}
 
 	public ArrayList<Product> findProductBySeller(Seller seller) {
-		ArrayList<Product> productSeller = new ArrayList<Product>();
 		ArrayList<Product> products = new ArrayList<Product>();
 		Connection c = MyConnection.getConnection();
 		SellerDao sellerDao = new SellerDao();

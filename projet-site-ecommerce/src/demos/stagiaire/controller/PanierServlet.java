@@ -41,7 +41,6 @@ public class PanierServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Panier panier = (Panier) session.getAttribute("panier");
-		request.setAttribute("prixTotalPanier", panier.prixTotalPanier());
 		request.setAttribute("cart", panier.findAll());
 
 		getServletContext().getRequestDispatcher("/WEB-INF/produit/panier.jsp").forward(request, response);
