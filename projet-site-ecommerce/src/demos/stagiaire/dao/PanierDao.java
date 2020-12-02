@@ -27,6 +27,7 @@ public class PanierDao implements Dao<LignePanier> {
 				ps.setInt(1, lignePanier.getLigneCommandePanierProduit().getId());
 				ps.setInt(2, lignePanier.getAcheteur().getId());
 				ps.executeUpdate();
+				System.out.println("panier");
 				ResultSet resultat = ps.getGeneratedKeys();
 				if (resultat.next()) {
 					lignePanier.setId(resultat.getInt(1));
@@ -69,7 +70,31 @@ public class PanierDao implements Dao<LignePanier> {
 		}
 		return null;
 	}
+	public ArrayList<LignePanier> findByPurcharser(Purchasser purchasser) {
+		Connection c = MyConnection.getConnection();
+		ArrayList<LignePanier> lignePaniers = new ArrayList<LignePanier>();
+		PurchasserDao purchasserDao = new PurchasserDao();
+		PanierProduitDao panierProduitDao = new PanierProduitDao();
+		if (c != null) {
+			try {
+				PreparedStatement ps = c.prepareStatement("select * from Panier where acheteurID = ? ");
+				ps.setInt(1,purchasser.getId());
+				ResultSet result = ps.executeQuery();
+				while (result.next()) {
+					LigneCommandePanierProduit lignePP = panierProduitDao.findById(result.getInt("produitPanierID"));
+					Purchasser acheteur = purchasserDao.findById(result.getInt("acheteurID"));
+					LignePanier ligne = new LignePanier(lignePP, acheteur);
+					lignePaniers.add(ligne);
+					return lignePaniers;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 
+	
 	@Override
 	public ArrayList<LignePanier> findAll() {
 		Connection c = MyConnection.getConnection();

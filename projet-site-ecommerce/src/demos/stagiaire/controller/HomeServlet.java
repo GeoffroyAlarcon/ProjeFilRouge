@@ -37,10 +37,11 @@ public class HomeServlet extends HttpServlet {
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
 		session.setAttribute("users", serviceUtilisateur);
 		request.setAttribute("produits", serviceProduit.findAll());
-		Seller seller = (Seller) session.getAttribute("vendeur");
+	
 		if (session.getAttribute("acheteur") != null) {
 			getServletContext().getRequestDispatcher("/WEB-INF/acheteur/home.jsp").forward(request, response);
-		} else {
+		}if  (session.getAttribute("vendeur" ) != null)  {
+			Seller seller = (Seller) session.getAttribute("vendeur");
 			request.setAttribute("produitsVendeur", serviceProduit.findProductBySeller(seller));
 			getServletContext().getRequestDispatcher("/WEB-INF/vendeur/home.jsp").forward(request, response);
 

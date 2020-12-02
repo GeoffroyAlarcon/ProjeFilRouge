@@ -63,7 +63,8 @@ public class AddUserServlet extends HttpServlet {
 			Purchasser acheteur = new Purchasser(email, password, carteBancaire, numeroTel, nom, prenom, adresse);
 			serviceUtilisateur.addPurchaser(acheteur);
 			HttpSession session = request.getSession();
-			session.setAttribute("id", acheteur.getId());
+			session.setAttribute("acheteur", acheteur);
+			session.setAttribute("serviceProduit", serviceProduit);
 			session.setAttribute("serviceUser", serviceUtilisateur);
 			response.sendRedirect("home");
 		}
@@ -75,9 +76,9 @@ public class AddUserServlet extends HttpServlet {
 			Seller vendeur = new Seller( email, password, nomCompagnie, siret);
 			HttpSession session = request.getSession();
 			serviceUtilisateur.addSeller(vendeur);
-			session.setAttribute("id", vendeur.getId());
 			session.setAttribute("serviceUser", serviceUtilisateur);
 			session.setAttribute("serviceProduit", serviceProduit);
+			session.setAttribute("vendeur", vendeur);
 			response.sendRedirect("home");
 
 		}

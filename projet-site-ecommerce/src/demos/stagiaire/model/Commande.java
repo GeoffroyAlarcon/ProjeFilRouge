@@ -1,6 +1,6 @@
 package demos.stagiaire.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Commande {
 	private int id;

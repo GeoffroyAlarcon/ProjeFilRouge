@@ -9,6 +9,7 @@ import java.util.List;
 
 import demos.stagiaire.model.LigneCommandePanierProduit;
 import demos.stagiaire.model.Product;
+import demos.stagiaire.model.Purchasser;
 import fr.demos.config.MyConnection;
 
 public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
@@ -62,6 +63,37 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 		return null;
 	}
 
+	
+	public ArrayList<LigneCommandePanierProduit> findByPurchasser( Purchasser purchasser) {
+		ProductDao productDao = new ProductDao();
+		ArrayList<LigneCommandePanierProduit> lignes = new ArrayList<LigneCommandePanierProduit>();
+		Connection c = MyConnection.getConnection();
+		if (c != null) {
+			try {
+				PreparedStatement ps = c.prepareStatement("select * from produitPanier inner join panier on produitpanier.produitPanierID = panier.produitPanierID where acheteurID = ? ;");
+			ps.setInt(1, purchasser.getId());
+				ResultSet result = ps.executeQuery();
+			
+				while (result.next()) {
+					int id = result.getInt("produitPanierID");
+					int idProduct = result.getInt("produitID");
+					int quantiteCommandee = result.getInt("quantiteCommandee");
+					Product produit = productDao.findById(idProduct);
+					LigneCommandePanierProduit ligne = new LigneCommandePanierProduit(id, quantiteCommandee, produit);
+					lignes.add(ligne);
+				}
+				return lignes;
+		
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+}
+	
+	
+	
 	@Override
 	public ArrayList<LigneCommandePanierProduit> findAll() {
 		ProductDao productDao = new ProductDao();
@@ -88,4 +120,5 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 		}
 		return null;
 }
+	
 }

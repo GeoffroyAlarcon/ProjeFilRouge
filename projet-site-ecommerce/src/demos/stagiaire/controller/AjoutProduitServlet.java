@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import demos.stagiaire.model.LigneCommande;
+import demos.stagiaire.model.LignePanier;
+import demos.stagiaire.model.Panier;
 import demos.stagiaire.model.Product;
 import demos.stagiaire.model.Seller;
 import demos.stagiaire.service.ServiceProduit;
@@ -18,7 +21,7 @@ import demos.stagiaire.service.ServiceProduit;
 @WebServlet("/ajoutProduit")
 public class AjoutProduitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private Panier panier = new Panier();	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -52,8 +55,8 @@ public class AjoutProduitServlet extends HttpServlet {
 		String description = request.getParameter("description");
 		Seller vendeur = (Seller) session.getAttribute("vendeur");
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		Product produit = new Product(5, designation, prixUnitaire, quantiteStock, vendeur, imageURL, description
-				);
+		Product produit = new Product(5, designation, prixUnitaire, quantiteStock, vendeur, imageURL, description);
+
 		serviceProduit.addProcduct(produit);
 		session.removeAttribute("serviceProduit");
 		session.setAttribute("serviceProduit", serviceProduit);

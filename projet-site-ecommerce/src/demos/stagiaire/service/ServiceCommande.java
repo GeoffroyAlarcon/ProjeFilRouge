@@ -3,72 +3,44 @@ package demos.stagiaire.service;
 import java.util.ArrayList;
 
 import demos.stagiaire.model.Product;
+import demos.stagiaire.model.Purchasser;
+import demos.stagiaire.dao.LigneCommandeDAO;
 import demos.stagiaire.model.LigneCommande;
 
 public class ServiceCommande {
-	ArrayList<LigneCommande> tableauDeCommande;
+	private LigneCommandeDAO ligneCommandeDAO = new LigneCommandeDAO();
 
-	public ServiceCommande(ArrayList<LigneCommande> tableauDeCommande) {
+	public ServiceCommande(LigneCommandeDAO ligneCommandeDAO) {
 		super();
-		this.tableauDeCommande = tableauDeCommande;
+		this.ligneCommandeDAO = ligneCommandeDAO;
 	}
 
 	public ServiceCommande() {
 		super();
-
 	}
 
-	public ArrayList<LigneCommande> getTableauDeCommande() {
-		return tableauDeCommande;
+	public LigneCommandeDAO getLigneCommandeDAO() {
+		return ligneCommandeDAO;
 	}
 
-	public void setTableauDeCommande(ArrayList<LigneCommande> tableauDeCommande) {
-		tableauDeCommande = tableauDeCommande;
+	public void setLigneCommandeDAO(LigneCommandeDAO ligneCommandeDAO) {
+		this.ligneCommandeDAO = ligneCommandeDAO;
 	}
 
-	public void addProcduct(LigneCommande ligneCommande) {
-		tableauDeCommande.add(ligneCommande);
-
+	public LigneCommande Add(LigneCommande ligne) {
+		return ligneCommandeDAO.save(ligne);
 	}
 
-	public void remove(LigneCommande ligneCommande) {
-		tableauDeCommande.remove(ligneCommande);
+	public ArrayList<LigneCommande> findall() {
+		return ligneCommandeDAO.findAll();
 	}
-
-	public LigneCommande findById(int id) {
-		for (int i = 0; i < tableauDeCommande.size(); i++) {
-			LigneCommande findProduitById = tableauDeCommande.get(i);
-			if (id == findProduitById.getId()) {
-				return tableauDeCommande.get(i);
-			}
-
-		}
-		return null;
-
-	}
-
-	public void updateOne(int id, LigneCommande ligneCommande) {
-		for (int i = 0; i < tableauDeCommande.size(); i++) {
-			LigneCommande findProduitById = tableauDeCommande.get(i);
-			if (id == findProduitById.getId()) {
-				tableauDeCommande.remove(findProduitById);
-				tableauDeCommande.add(ligneCommande);
-			}
-
-		}
-
-	}
-
-	public LigneCommande findAll() {
-		for (int i = 0; i < tableauDeCommande.size(); i++) {
-			return tableauDeCommande.get(i);
-		}
-		return null;
+	public ArrayList<LigneCommande> findbyPurchasser(Purchasser purchasser) {
+		return ligneCommandeDAO.findbyPurchasser(purchasser);
 	}
 
 	@Override
 	public String toString() {
-		return "ServiceCommande [tableauDeCommande=" + tableauDeCommande + "]";
+		return "ServiceCommande [ligneCommandeDAO=" + ligneCommandeDAO + "]";
 	}
 
 }
