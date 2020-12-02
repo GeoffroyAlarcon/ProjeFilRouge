@@ -42,7 +42,7 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 		Connection c = MyConnection.getConnection();
 		if (c != null) {
 			try {
-				PreparedStatement ps = c.prepareStatement("DELETE FROM acheteur WHERE produitPanierID = ?");
+				PreparedStatement ps = c.prepareStatement("DELETE FROM prroduitPanier WHERE produitPanierID = ?");
 				ps.setInt(1, ligne.getId());
 				ps.executeUpdate();
 			} catch (SQLException e) {
@@ -50,6 +50,21 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 			}
 		}
 	}
+
+	public void cleanCart(Purchasser purchasser) {
+		Connection c = MyConnection.getConnection();
+		if (c != null) {
+			try {
+				PreparedStatement ps = c.prepareStatement("DELETE FROM prroduitPanier inner join panier on produitpanier.produitPanierID = panier.produitPanierID where acheteurID = ? ;\"");
+				ps.setInt(1, purchasser.getId());
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	
 
 	@Override
 	public LigneCommandePanierProduit update(LigneCommandePanierProduit t) {
@@ -63,17 +78,17 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 		return null;
 	}
 
-	
-	public ArrayList<LigneCommandePanierProduit> findByPurchasser( Purchasser purchasser) {
+	public ArrayList<LigneCommandePanierProduit> findByPurchasser(Purchasser purchasser) {
 		ProductDao productDao = new ProductDao();
 		ArrayList<LigneCommandePanierProduit> lignes = new ArrayList<LigneCommandePanierProduit>();
 		Connection c = MyConnection.getConnection();
 		if (c != null) {
 			try {
-				PreparedStatement ps = c.prepareStatement("select * from produitPanier inner join panier on produitpanier.produitPanierID = panier.produitPanierID where acheteurID = ? ;");
-			ps.setInt(1, purchasser.getId());
+				PreparedStatement ps = c.prepareStatement(
+						"select * from produitPanier inner join panier on produitpanier.produitPanierID = panier.produitPanierID where acheteurID = ? ;");
+				ps.setInt(1, purchasser.getId());
 				ResultSet result = ps.executeQuery();
-			
+
 				while (result.next()) {
 					int id = result.getInt("produitPanierID");
 					int idProduct = result.getInt("produitID");
@@ -83,17 +98,14 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 					lignes.add(ligne);
 				}
 				return lignes;
-		
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return null;
-}
-	
-	
-	
+	}
+
 	@Override
 	public ArrayList<LigneCommandePanierProduit> findAll() {
 		ProductDao productDao = new ProductDao();
@@ -112,13 +124,12 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 					lignes.add(ligne);
 				}
 				return lignes;
-		
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return null;
-}
-	
+	}
+
 }

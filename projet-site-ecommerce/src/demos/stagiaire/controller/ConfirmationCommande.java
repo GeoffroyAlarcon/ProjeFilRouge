@@ -46,7 +46,7 @@ public class ConfirmationCommande extends HttpServlet {
 		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
 		Date datescommande = new Date();
 		Panier panier = (Panier) session.getAttribute("panier");
-		ArrayList<LigneCommandePanierProduit> allProducts = panier.findByPurchasser(purchasser)();
+		ArrayList<LigneCommandePanierProduit> allProducts = panier.findByPurchasser(purchasser);
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
 		// boucle pour stocker les commandes qui ont abouti
 		for (LigneCommandePanierProduit ligne : allProducts) {
@@ -54,7 +54,7 @@ public class ConfirmationCommande extends HttpServlet {
 			int quantiteCommandee = ligne.getQuantiteCommandee();
 Commande	commande =(Commande) session.getAttribute("commande");
 			LigneCommande ligneCommande = new LigneCommande(2, quantiteCommandee, commande, produit);
-			serviceCommande.addProcduct(ligneCommande);
+			serviceCommande.add(ligneCommande);
 		}
 		session.setAttribute("serviceCommande", serviceCommande);
 	}
