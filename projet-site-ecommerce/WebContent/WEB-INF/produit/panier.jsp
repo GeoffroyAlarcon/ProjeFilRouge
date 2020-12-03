@@ -20,34 +20,46 @@
 		<div class="row">
 			<c:forEach items="${cart}" var="produit" varStatus="status">
 				<div class="col-md-3 text-center">
-					<p> Nom de l'article : 
+					<p>
+						Nom de l'article :
 						<c:out value="${produit.produit.designation}"></c:out>
 					</p>
 				</div>
 				<div class="col-md-2 text-center">
-					<p> prix de l'article :
+					<p>
+						prix de l'article :
 						<c:out value="${produit.produit.prixUnitaire}"></c:out>
 					</p>
 				</div>
-	
-		<div class="col-md-2 text-center">
-					<p>Quantité commandée :
+
+				<div class="col-md-2 text-center">
+					<p>
+						Quantité commandée :
 						<c:out value="${produit.quantiteCommandee}"></c:out>
 					</p>
 				</div>
 				<div class="col-md-3 text-center">
-					<p> Prix total :
-						<c:out value="${produit.produit.prixUnitaire * produit.quantiteCommandee}"></c:out>
+					<p>
+						Prix total :
+						<c:out
+							value="${produit.produit.prixUnitaire * produit.quantiteCommandee}"></c:out>
 					</p>
 				</div>
 				<div class="col-md-2 text-center">
-					<c:url  var="deleteProduct" value="/deleteCart?idObject=${produit.id}"></c:url>
+					<c:url var="deleteProduct"
+						value="/deleteCart?idObject=${produit.id}"></c:url>
 					<a href="${deleteProduct}">
 						<button class="btn btn-primary" type="button">Supprimez
 							article</button>
 					</a>
+					<c:url var="UpdateCart" value="/updateCart?idObject=${produit.id}"></c:url>
+					<a href="${updateCart}">
+						<button class="btn btn-primary" type="button">modifier
+							quantité</button>
+					</a>
+
 				</div>
-				
+
 			</c:forEach>
 			<div class="col-12 text-center">
 				<h4>
@@ -60,14 +72,9 @@
 		<!-- end of panier-->
 		<!-- form-->
 		<div class="container">
-			<div class="row bg-primary my-5">
-				<div class="col text-center text-white">
-					<h2>Passez votre commmande</h2>
-				</div>
-			</div>
-			<form  action="panier" method="post">
+			<form action="panier" method="post">
 				<input class="btn btn-primary" type="submit"
-							value="Ajouter au panier" />
+					value="Passez une Commande " />
 			</form>
 		</div>
 	</div>

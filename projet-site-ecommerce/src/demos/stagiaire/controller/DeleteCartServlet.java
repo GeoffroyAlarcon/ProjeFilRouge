@@ -6,9 +6,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import demos.stagiaire.dao.PanierDao;
 import demos.stagiaire.dao.PanierProduitDao;
 import demos.stagiaire.model.LigneCommandePanierProduit;
+import demos.stagiaire.model.LignePanier;
+import demos.stagiaire.model.Purchasser;
 
 /**
  * Servlet implementation class DeleteCartServlet
@@ -17,6 +21,7 @@ import demos.stagiaire.model.LigneCommandePanierProduit;
 public class DeleteCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PanierProduitDao panierProduitDao = new PanierProduitDao();
+	private PanierDao panierdao = new PanierDao();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -33,10 +38,13 @@ public class DeleteCartServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
 		int idligne = Integer.parseInt(request.getParameter("idObject"));
 		LigneCommandePanierProduit ligne = panierProduitDao.findById(idligne);
-		panierProduitDao.remove(ligne);
-response.sendRedirect("panier");
+		panierdao.removeByLigne(ligne);
+		 panierProduitDao.remove(ligne);
+		response.sendRedirect("panier");
 	}
 
 	/**

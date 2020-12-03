@@ -10,15 +10,15 @@ import demos.stagiaire.dao.PanierProduitDao;
 public class Panier {
 	private PanierProduitDao panierProduitDao = new PanierProduitDao();
 	private PanierDao panierDao = new PanierDao();
-
 	public LignePanier add(LignePanier lignePanier) {
 		return panierDao.save(lignePanier);
 	}
-public void removeall(Purchasser purchasser) {
-	panierDao.removeAllProductInCart(purchasser);
-	panierProduitDao.removeAllProductInCart(purchasser);
-}
-	
+
+	public void removeall(Purchasser purchasser) {
+		panierDao.removeAllProductInCart(purchasser);
+		panierProduitDao.removeAllProductInCart(purchasser);
+	}
+
 	public ArrayList<LigneCommandePanierProduit> findByPurchasser(Purchasser purchasser) {
 		return panierProduitDao.findByPurchasser(purchasser);
 

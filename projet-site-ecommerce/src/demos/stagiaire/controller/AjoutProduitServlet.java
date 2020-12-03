@@ -55,7 +55,7 @@ public class AjoutProduitServlet extends HttpServlet {
 		String description = request.getParameter("description");
 		Seller vendeur = (Seller) session.getAttribute("vendeur");
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		Product produit = new Product(5, designation, prixUnitaire, quantiteStock, vendeur, imageURL, description);
+		Product produit = new Product( designation, prixUnitaire, quantiteStock, vendeur, imageURL, description);
 
 		serviceProduit.addProcduct(produit);
 		session.removeAttribute("serviceProduit");

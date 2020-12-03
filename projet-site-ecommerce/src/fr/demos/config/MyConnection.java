@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class MyConnection {
 	private static String url = "jdbc:mysql://localhost:3306/projet_fil_rouge?useSSL=false&serverTimezone=UTC";
 	private static String utilisateur = "root";
-	private static String motDePasse = "test21";
+	private static String motDePasse = "root";
 	private static Connection connexion = null;
 	private MyConnection() {
 		try {

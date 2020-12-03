@@ -69,6 +69,7 @@ public class PageProduitServlet extends HttpServlet {
 		LigneCommandePanierProduit ligneCommandePanierProduit = new LigneCommandePanierProduit(quantiteCommandee,
 				produit);
 		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
+	
 		LignePanier lignePanier = new LignePanier(ligneCommandePanierProduit, acheteur);
 		if (produit.getQuantiteStock() < ligneCommandePanierProduit.getQuantiteCommandee()) {
 			System.err.println("la quantité commandée est suppérieure à la quantité en stock !");
@@ -76,7 +77,7 @@ public class PageProduitServlet extends HttpServlet {
 					response);
 
 		} else {
-
+if( panierProduitDao.)
 			panierProduitDao.save(ligneCommandePanierProduit);
 			panier.add(lignePanier);
 			response.sendRedirect("panier");

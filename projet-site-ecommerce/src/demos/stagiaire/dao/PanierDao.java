@@ -59,25 +59,6 @@ public class PanierDao implements Dao<LignePanier> {
 	@Override
 	public LignePanier findById(int id) {
 		// TODO Auto-generated method stub
-		Connection c = MyConnection.getConnection();
-		PurchasserDao purchasserDao = new PurchasserDao();
-		PanierProduitDao panierProduitDao = new PanierProduitDao();
-		if (c != null) {
-			try {
-				PreparedStatement ps = c.prepareStatement("select * from Panier ");
-				;
-				ResultSet result = ps.executeQuery();
-				if (result.next()) {
-					LigneCommandePanierProduit lignePP = panierProduitDao.findById(result.getInt("produitPanierID"));
-					Purchasser acheteur = purchasserDao.findById(result.getInt("acheteurID"));
-					LignePanier ligne = new LignePanier(lignePP, acheteur);
-					return ligne;
-
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		return null;
 	}
 
@@ -114,7 +95,7 @@ public class PanierDao implements Dao<LignePanier> {
 		if (c != null) {
 			try {
 				PreparedStatement ps = c.prepareStatement("select * from Panier ");
-				;
+				
 				ResultSet result = ps.executeQuery();
 				while (result.next()) {
 					LigneCommandePanierProduit lignePP = panierProduitDao.findById(result.getInt("produitPanierID"));
@@ -137,9 +118,30 @@ public class PanierDao implements Dao<LignePanier> {
 	}
 
 	@Override
-	public void remove(LignePanier t) {
-		// TODO Auto-generated method stub
+	public void remove(LignePanier lignePanier) {
+		Connection c = MyConnection.getConnection();
+		if (c != null) {
+			try {
+				PreparedStatement ps = c.prepareStatement("delete from panier where produitPanierid = ?;");
+				ps.setInt(1, lignePanier.getId());
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
+	public void removeByLigne(LigneCommandePanierProduit ligne) {
+		Connection c = MyConnection.getConnection();
+		if (c != null) {
+			try {
+				PreparedStatement ps = c.prepareStatement("delete from panier where produitPanierID = ?;");
+				ps.setInt(1, ligne.getId());
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
+	}
 }
