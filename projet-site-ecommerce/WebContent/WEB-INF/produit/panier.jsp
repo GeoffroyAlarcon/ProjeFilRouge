@@ -24,13 +24,13 @@
 						<c:out value="${produit.produit.designation}"></c:out>
 					</p>
 				</div>
-				<div class="col-md-3 text-center">
+				<div class="col-md-2 text-center">
 					<p> prix de l'article :
 						<c:out value="${produit.produit.prixUnitaire}"></c:out>
 					</p>
 				</div>
 	
-		<div class="col-md-3 text-center">
+		<div class="col-md-2 text-center">
 					<p>Quantité commandée :
 						<c:out value="${produit.quantiteCommandee}"></c:out>
 					</p>
@@ -40,6 +40,14 @@
 						<c:out value="${produit.produit.prixUnitaire * produit.quantiteCommandee}"></c:out>
 					</p>
 				</div>
+				<div class="col-md-2 text-center">
+					<c:url  var="deleteProduct" value="/deleteCart?idObject=${produit.id}"></c:url>
+					<a href="${deleteProduct}">
+						<button class="btn btn-primary" type="button">Supprimez
+							article</button>
+					</a>
+				</div>
+				
 			</c:forEach>
 			<div class="col-12 text-center">
 				<h4>

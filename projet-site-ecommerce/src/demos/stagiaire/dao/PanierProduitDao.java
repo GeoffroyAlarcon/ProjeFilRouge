@@ -42,7 +42,7 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 		Connection c = MyConnection.getConnection();
 		if (c != null) {
 			try {
-				PreparedStatement ps = c.prepareStatement("DELETE FROM prroduitPanier WHERE produitPanierID = ?");
+				PreparedStatement ps = c.prepareStatement("DELETE FROM produitPanier WHERE produitPanierID = ?");
 				ps.setInt(1, ligne.getId());
 				ps.executeUpdate();
 			} catch (SQLException e) {
@@ -74,7 +74,26 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 
 	@Override
 	public LigneCommandePanierProduit findById(int id) {
-		// TODO Auto-generated method stub
+		ProductDao productDao = new ProductDao();
+		Connection c = MyConnection.getConnection();
+		if (c != null) {
+			try {
+				PreparedStatement ps = c.prepareStatement("select * from produitPanier where produitPanierID = ? ;");
+				ps.setInt(1, id);
+				ResultSet result = ps.executeQuery();
+
+				if (result.next()) {
+					int idProduct = result.getInt("produitID");
+					int quantiteCommandee = result.getInt("quantiteCommandee");
+					Product produit = productDao.findById(idProduct);
+					LigneCommandePanierProduit ligne = new LigneCommandePanierProduit(id, quantiteCommandee, produit);
+					return ligne;
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return null;
 	}
 
