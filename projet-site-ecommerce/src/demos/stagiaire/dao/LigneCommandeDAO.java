@@ -21,7 +21,7 @@ public class LigneCommandeDAO implements Dao<LigneCommande> {
 		if (c != null) {
 			try {
 				PreparedStatement ps = c.prepareStatement(
-						"insert into ligneCommande (quantiteCommandee,produitID,commandeID) values (?,?,?); ",
+						"insert into ligneCommande (stockCommandee,produitID,commandeID) values (?,?,?); ",
 						PreparedStatement.RETURN_GENERATED_KEYS);
 				ps.setInt(1, ligne.getQuantiteCommandee());
 				ps.setInt(2, ligne.getProduit().getId());
@@ -79,7 +79,7 @@ public class LigneCommandeDAO implements Dao<LigneCommande> {
 					int id = result.getInt("produitPanierID");
 					int idProduct = result.getInt("produitID");
 					int idCommande = result.getInt("commandeID");
-					int quantiteCommandee = result.getInt("quantiteCommandee");
+					int quantiteCommandee = result.getInt("stockCommandee");
 					Product produit = productDao.findById(idProduct);
 					Commande commande = commandeDao.findById(idCommande);
 					LigneCommande ligne = new LigneCommande(id, quantiteCommandee, commande, produit);
@@ -102,15 +102,14 @@ public class LigneCommandeDAO implements Dao<LigneCommande> {
 		Connection c = MyConnection.getConnection();
 		if (c != null) {
 			try {
-				PreparedStatement ps = c.prepareStatement(
-						"select * from ligneCommande where (select commandeID from commande where acheteurID = ?) ;");
+				PreparedStatement ps = c.prepareStatement("select * from ligneCommande inner join   commande where acheteurID =? ;");
 				ps.setInt(1, purchasser.getId());
 				ResultSet result = ps.executeQuery();
 				while (result.next()) {
-					int id = result.getInt("produitPanierID");
+					int id = result.getInt("ligneCommandeID");
 					int idProduct = result.getInt("produitID");
 					int idCommande = result.getInt("commandeID");
-					int quantiteCommandee = result.getInt("quantiteCommandee");
+					int quantiteCommandee = result.getInt("stockCommandee");
 					Product produit = productDao.findById(idProduct);
 					Commande commande = commandeDao.findById(idCommande);
 					LigneCommande ligne = new LigneCommande(id, quantiteCommandee, commande, produit);

@@ -27,7 +27,7 @@ public class ServiceCommande {
 		this.ligneCommandeDAO = ligneCommandeDAO;
 	}
 
-	public LigneCommande Add(LigneCommande ligne) {
+	public LigneCommande add(LigneCommande ligne) {
 		return ligneCommandeDAO.save(ligne);
 	}
 

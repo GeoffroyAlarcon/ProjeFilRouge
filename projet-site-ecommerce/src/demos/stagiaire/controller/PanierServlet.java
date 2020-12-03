@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import demos.stagiaire.dao.CommandeDao;
 import demos.stagiaire.dao.PanierDao;
 import demos.stagiaire.dao.PanierProduitDao;
 import demos.stagiaire.dao.ProductDao;
@@ -31,8 +32,9 @@ public class PanierServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ServiceCommande serviceCommande = new ServiceCommande();
 	private PanierProduitDao panierProduitDao = new PanierProduitDao();
-	ProductDao productDao = new ProductDao();
-
+	private ProductDao productDao = new ProductDao();
+	private CommandeDao commandeDao = new CommandeDao();
+	private Panier panier = new Panier();
 
 	public PanierServlet() {
 		super();
@@ -55,7 +57,7 @@ public class PanierServlet extends HttpServlet {
 		for (LigneCommandePanierProduit ligne : allProduct) {
 			Product produit = ligne.getProduit();
 			int quantitecommandee = ligne.getQuantiteCommandee();
-			prixTotal = prixTotal +quantitecommandee * produit.getPrixUnitaire();
+			prixTotal = prixTotal + quantitecommandee * produit.getPrixUnitaire();
 		}
 		request.setAttribute("prixTotalPanier", prixTotal);
 		getServletContext().getRequestDispatcher("/WEB-INF/produit/panier.jsp").forward(request, response);
@@ -70,22 +72,23 @@ public class PanierServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
-		Date datescommande = new Date(); 
 		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		ArrayList<LigneCommandePanierProduit> allProduct = panierProduitDao.findAll();
+		Commande commande = new Commande(acheteur);
+		commandeDao.save(commande);
+		ArrayList<LigneCommandePanierProduit> allProduct = panierProduitDao.findByPurchasser(acheteur);
 		for (LigneCommandePanierProduit ligne : allProduct) {
 			Product produit = ligne.getProduit();
-			int quantitecommandee = ligne.getQuantiteCommandee();
-			produit.setQuantiteStock(produit.getQuantiteStock() - quantitecommandee);
+			int quantiteCommandee = ligne.getQuantiteCommandee();
+			LigneCommande ligneCommande = new LigneCommande(quantiteCommandee, commande, produit);
+			serviceCommande.add(ligneCommande);
+			produit.setQuantiteStock(produit.getQuantiteStock() - quantiteCommandee);
 			productDao.update(produit);
 			int id = produit.getId();
 			serviceProduit.updateOne(id, produit);
 		}
-//		Commande commande = new Commande(22, datescommande, acheteur);
-		session.setAttribute("serviceProduit", serviceProduit);
-	//	session.setAttribute("commande", commande);
-		session.setAttribute("serviceCommande", serviceCommande);
+		panier.removeall(acheteur);
 
+		response.sendRedirect("confirmationCommande");
 	}
 
 }

@@ -57,7 +57,7 @@
 					<h2>Passez votre commmande</h2>
 				</div>
 			</div>
-			<form id="form" method="post">
+			<form  action="panier" method="post">
 				<input class="btn btn-primary" type="submit"
 							value="Ajouter au panier" />
 			</form>

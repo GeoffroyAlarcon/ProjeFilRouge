@@ -19,10 +19,9 @@ public class CommandeDao implements Dao<Commande> {
 		if (c != null) {
 			try {
 				PreparedStatement ps = c.prepareStatement(
-						"insert into commande (dateCommande,produitID) values (?,?); ",
+						"insert into commande (dateCommande,acheteurID) values ( SYSDATE(),?); ",
 						PreparedStatement.RETURN_GENERATED_KEYS);
-				// ps.setDate(1, commande.getDatescommande());
-				ps.setInt(2, commande.getAcheteur().getId());
+				ps.setInt(1, commande.getAcheteur().getId());
 				ps.executeUpdate();
 				ResultSet resultat = ps.getGeneratedKeys();
 				if (resultat.next()) {
@@ -62,7 +61,7 @@ public class CommandeDao implements Dao<Commande> {
 		PurchasserDao purchasserDao = new PurchasserDao();
 		if (c != null) {
 			try {
-				PreparedStatement ps = c.prepareStatement("select * from commande ;");
+				PreparedStatement ps = c.prepareStatement("select * from commande  where CommandeID = ?;");
 				ps.setInt(1, id);
 				ResultSet result = ps.executeQuery();
 				if (result.next()) {

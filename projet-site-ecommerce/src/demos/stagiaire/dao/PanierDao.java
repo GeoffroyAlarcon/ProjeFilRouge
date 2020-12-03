@@ -41,8 +41,18 @@ public class PanierDao implements Dao<LignePanier> {
 		return null;
 	}
 
-	@Override
-	public void remove(LignePanier lignePanier) {
+	public void removeAllProductInCart(Purchasser purchasser) {
+		Connection c = MyConnection.getConnection();
+		if (c != null) {
+			try {
+				PreparedStatement ps = c.prepareStatement(
+						"delete panier from produitpanier  inner join panier  on panier.produitPanierID = produitPanier.produitPanierID  where acheteurID = ?;");
+				ps.setInt(1, purchasser.getId());
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 
@@ -70,6 +80,7 @@ public class PanierDao implements Dao<LignePanier> {
 		}
 		return null;
 	}
+
 	public ArrayList<LignePanier> findByPurcharser(Purchasser purchasser) {
 		Connection c = MyConnection.getConnection();
 		ArrayList<LignePanier> lignePaniers = new ArrayList<LignePanier>();
@@ -78,7 +89,7 @@ public class PanierDao implements Dao<LignePanier> {
 		if (c != null) {
 			try {
 				PreparedStatement ps = c.prepareStatement("select * from Panier where acheteurID = ? ");
-				ps.setInt(1,purchasser.getId());
+				ps.setInt(1, purchasser.getId());
 				ResultSet result = ps.executeQuery();
 				while (result.next()) {
 					LigneCommandePanierProduit lignePP = panierProduitDao.findById(result.getInt("produitPanierID"));
@@ -94,7 +105,6 @@ public class PanierDao implements Dao<LignePanier> {
 		return null;
 	}
 
-	
 	@Override
 	public ArrayList<LignePanier> findAll() {
 		Connection c = MyConnection.getConnection();
@@ -124,6 +134,12 @@ public class PanierDao implements Dao<LignePanier> {
 	public LignePanier update(LignePanier t) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void remove(LignePanier t) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -14,6 +14,13 @@ public class LigneCommande {
 		this.produit = produit;
 	}
 
+	public LigneCommande(int quantiteCommandee, Commande commande, Product produit) {
+		super();
+		this.quantiteCommandee = quantiteCommandee;
+		this.commande = commande;
+		this.produit = produit;
+	}
+
 	public LigneCommande() {
 	}
 

@@ -26,6 +26,7 @@ import demos.stagiaire.service.ServiceProduit;
 @WebServlet("/confirmationCommande")
 public class ConfirmationCommande extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ServiceCommande serviceCommande = new ServiceCommande();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -41,22 +42,12 @@ public class ConfirmationCommande extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ServiceCommande serviceCommande = new ServiceCommande();
 		HttpSession session = request.getSession();
 		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
-		Date datescommande = new Date();
-		Panier panier = (Panier) session.getAttribute("panier");
-		ArrayList<LigneCommandePanierProduit> allProducts = panier.findByPurchasser(purchasser);
-		ServiceProduit serviceProduit = (ServiceProduit) session.getAttribute("serviceProduit");
-		// boucle pour stocker les commandes qui ont abouti
-		for (LigneCommandePanierProduit ligne : allProducts) {
-			Product produit = ligne.getProduit();
-			int quantiteCommandee = ligne.getQuantiteCommandee();
-Commande	commande =(Commande) session.getAttribute("commande");
-			LigneCommande ligneCommande = new LigneCommande(2, quantiteCommandee, commande, produit);
-			serviceCommande.add(ligneCommande);
-		}
+	request.setAttribute("allCommande",serviceCommande.findbyPurchasser(acheteur));
 		session.setAttribute("serviceCommande", serviceCommande);
+		getServletContext().getRequestDispatcher("/WEB-INF/acheteur/commande.jsp").forward(request, response);
+
 	}
 
 	/**

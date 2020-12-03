@@ -14,57 +14,54 @@
 </head>
 <body>
 	<%@ include file="../../header/header.jsp"%>
-	<div class="container">
-		<div id="banner" class="row">
-			<div class="offset-lg-2 col-lg-8">
-				<div class="text-center">
-					<img src="images/15675819263013_image1.png" alt="">
-				</div>
-			</div>
-		</div>
-
-	</div>
 	<div class="container-fluid">
 
 		<div class="row">
-			<c:forEach items="${cart}" var="produit" varStatus="status">
+			<c:forEach items="${allCommande}" var="commande" varStatus="status">
+
 				<div class="col-md-3 text-center">
-					<p> Nom de l'article : 
-						<c:out value="${produit.produit.designation}"></c:out>
+					<p>
+						Numéro de la commande :
+						<c:out value="${commande.commande.id}"></c:out>
+					</p>
+				</div>
+
+				<div class="col-md-3 text-center">
+					<p>
+						Date de la commande :
+						<c:out value="${commande.commande.datescommande}"></c:out>
 					</p>
 				</div>
 				<div class="col-md-3 text-center">
-					<p> prix de l'article :
-						<c:out value="${produit.produit.prixUnitaire}"></c:out>
+					<p>
+						Nom de l'article Commande :
+						<c:out value="${commande.produit.designation}"></c:out>
 					</p>
 				</div>
-	
-		<div class="col-md-3 text-center">
-					<p>Quantité commandée :
-						<c:out value="${produit.quantiteCommandee}"></c:out>
-					</p>
-				</div>
+
 				<div class="col-md-3 text-center">
-					<p> Prix total :
-						<c:out value="${produit.produit.prixUnitaire * produit.quantiteCommandee}"></c:out>
+					<p>
+						Prix total de article :
+						<c:out
+							value="${commande.produit.prixUnitaire * commande.quantiteCommandee}"></c:out>
+						euros
 					</p>
 				</div>
 			</c:forEach>
-	<div class="col-12 text-center"> <h4> total du panier : <c:out value="${prixTotalPanier}"></c:out> euros </h4> </div>		
-		</div>
-		<!-- end of panier-->
-		<!-- form-->
-		<div class="container">
-			<div class="row bg-primary my-5">
-				<div class="col text-center text-white">
-					<h2>Passez votre commmande</h2>
-				</div>
-			</div>
-			<form id="form"></form>
-		</div>
-	</div>
-	<!-- end form-->
 
+			<!-- end of panier-->
+			<!-- form-->
+			<div class="container">
+				<div class="row bg-primary my-5">
+					<div class="col text-center text-white">
+						<h2>Passez votre commmande</h2>
+					</div>
+				</div>
+				<form id="form"></form>
+			</div>
+		</div>
+		<!-- end form-->
+	</div>
 	<!-- Footer -->
 	<div class="container-fluid">
 		<footer class="py-4 my-5 bg-dark">

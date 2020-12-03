@@ -14,6 +14,11 @@ public class Commande {
 		this.acheteur = acheteur;
 	}
 
+	public Commande(Purchasser acheteur) {
+		super();
+		this.acheteur = acheteur;
+	}
+
 	public Commande() {
 		super();
 

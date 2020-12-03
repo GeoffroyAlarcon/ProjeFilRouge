@@ -51,20 +51,20 @@ public class PanierProduitDao implements Dao<LigneCommandePanierProduit> {
 		}
 	}
 
-	public void cleanCart(Purchasser purchasser) {
+	public void removeAllProductInCart(Purchasser purchasser) {
 		Connection c = MyConnection.getConnection();
 		if (c != null) {
 			try {
-				PreparedStatement ps = c.prepareStatement("DELETE FROM prroduitPanier inner join panier on produitpanier.produitPanierID = panier.produitPanierID where acheteurID = ? ;\"");
+				PreparedStatement ps = c.prepareStatement(
+						"delete produitpanier from produitpanier  inner join panier  on panier.produitPanierID = produitPanier.produitPanierID  where acheteurID = ?;");
 				ps.setInt(1, purchasser.getId());
 				ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-	}
 
-	
+	}
 
 	@Override
 	public LigneCommandePanierProduit update(LigneCommandePanierProduit t) {
