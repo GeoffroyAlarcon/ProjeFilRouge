@@ -10,6 +10,7 @@ import java.util.List;
 import demos.stagiaire.model.LigneCommandePanierProduit;
 import demos.stagiaire.model.LignePanier;
 import demos.stagiaire.model.Panier;
+import demos.stagiaire.model.Product;
 import demos.stagiaire.model.Purchasser;
 import fr.demos.config.MyConnection;
 
@@ -46,7 +47,7 @@ public class PanierDao implements Dao<LignePanier> {
 		if (c != null) {
 			try {
 				PreparedStatement ps = c.prepareStatement(
-						"delete panier from produitpanier  inner join panier  on panier.produitPanierID = produitPanier.produitPanierID  where acheteurID = ?;");
+						"delete panier, produitpanier from panier inner join produitpanier  on panier.produitPanierID = produitPanier.produitPanierID  where acheteurID = ?;");
 				ps.setInt(1, purchasser.getId());
 				ps.executeUpdate();
 			} catch (SQLException e) {
@@ -56,7 +57,29 @@ public class PanierDao implements Dao<LignePanier> {
 
 	}
 
-	@Override
+	public void removeByPurchasserAndProduct(Purchasser purchasser, Product product) {
+		Connection c = MyConnection.getConnection();
+		PanierProduitDao panierProduitDao = new PanierProduitDao();
+		boolean test = false;
+		if (c != null) {
+			try {
+				PreparedStatement ps = c.prepareStatement(
+						"delete panier  from Panier  inner join  produitpanier on panier.produitpanierID = produitpanier.produitpanierID where produitID = ? and acheteurID = ?;");
+				ps.setInt(1, product.getId());
+				ps.setInt(2, purchasser.getId());
+				ps.executeUpdate();
+				ps = c.prepareStatement(
+						"delete produitPanier from Panier  inner join  produitpanier on panier.produitpanierID = produitpanier.produitpanierID where produitID = ? and acheteurID = ?;");
+				ps.setInt(1, product.getId());
+				ps.setInt(2, purchasser.getId());
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	public LignePanier findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -95,7 +118,7 @@ public class PanierDao implements Dao<LignePanier> {
 		if (c != null) {
 			try {
 				PreparedStatement ps = c.prepareStatement("select * from Panier ");
-				
+
 				ResultSet result = ps.executeQuery();
 				while (result.next()) {
 					LigneCommandePanierProduit lignePP = panierProduitDao.findById(result.getInt("produitPanierID"));
@@ -131,6 +154,7 @@ public class PanierDao implements Dao<LignePanier> {
 		}
 
 	}
+
 	public void removeByLigne(LigneCommandePanierProduit ligne) {
 		Connection c = MyConnection.getConnection();
 		if (c != null) {

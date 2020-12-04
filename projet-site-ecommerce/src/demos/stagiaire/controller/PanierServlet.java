@@ -34,7 +34,7 @@ public class PanierServlet extends HttpServlet {
 	private PanierProduitDao panierProduitDao = new PanierProduitDao();
 	private ProductDao productDao = new ProductDao();
 	private CommandeDao commandeDao = new CommandeDao();
-	private Panier panier = new Panier();
+	private PanierDao panierDao = new PanierDao();
 
 	public PanierServlet() {
 		super();
@@ -79,14 +79,16 @@ public class PanierServlet extends HttpServlet {
 		for (LigneCommandePanierProduit ligne : allProduct) {
 			Product produit = ligne.getProduit();
 			int quantiteCommandee = ligne.getQuantiteCommandee();
-			LigneCommande ligneCommande = new LigneCommande(quantiteCommandee, commande, produit);
-			serviceCommande.add(ligneCommande);
 			produit.setQuantiteStock(produit.getQuantiteStock() - quantiteCommandee);
 			productDao.update(produit);
 			int id = produit.getId();
 			serviceProduit.updateOne(id, produit);
+			panierDao.removeAllProductInCart(acheteur);
+			panierProduitDao.removeAllProductInCart(acheteur);
+			LigneCommande ligneCommande = new LigneCommande(quantiteCommandee, commande, produit);
+			serviceCommande.add(ligneCommande);
+
 		}
-		panier.removeall(acheteur);
 
 		response.sendRedirect("confirmationCommande");
 	}

@@ -49,13 +49,13 @@ selectUser.addEventListener('input', function() {
 
 		// affichage du formulaire d'inscription pour les acheteurs
 		formUser.innerHTML = "";
-		formUser.appendChild(divCb).appendChild(labelCb).innerHTML = " Rentrez votre numéro de carte de  carte bancaire";
+		formUser.appendChild(divCb).appendChild(labelCb).innerHTML = " Rentrez votre numero de carte de  carte bancaire";
 		formUser.appendChild(divCb).appendChild(inputCb);
-		formUser.appendChild(divTel).appendChild(labelTel).innerHTML = " Rentrez votre numéro de carte de téléphone";
+		formUser.appendChild(divTel).appendChild(labelTel).innerHTML = " Rentrez votre numero de telephone";
 		formUser.appendChild(divTel).appendChild(inputTel);
 		formUser.appendChild(divNom).appendChild(labelNom).innerHTML = " Rentrez votre nom de Famille";
 		formUser.appendChild(divNom).appendChild(inputNom);
-		formUser.appendChild(divPrenom).appendChild(labelPrenom).innerHTML = " Rentrez votre prénom";
+		formUser.appendChild(divPrenom).appendChild(labelPrenom).innerHTML = " Rentrez votre prenom";
 		formUser.appendChild(divPrenom).appendChild(inputPrenom);
 		formUser.appendChild(divRue).appendChild(labelRue).innerHTML = " Rentrez le Nom de Votre rue";
 		formUser.appendChild(divRue).appendChild(inputRue);
@@ -86,7 +86,7 @@ selectUser.addEventListener('input', function() {
 		formUser.innerhtml = "";
 		formUser.appendChild(divCompagnie).appendChild(labelCompagnie).innerHTML = " Rentrez le nom de votre Compagnie";
 		formUser.appendChild(divCompagnie).appendChild(inputCompagnie);
-		formUser.appendChild(divSiret).appendChild(labelSiret).innerHTML = " Rentrez Votre numéro de Siret";
+		formUser.appendChild(divSiret).appendChild(labelSiret).innerHTML = " Rentrez Votre numero de Siret";
 		formUser.appendChild(divSiret).appendChild(inputSiret);
 		formUser.appendChild(divSubmit).appendChild(inputSubmit);
 	}

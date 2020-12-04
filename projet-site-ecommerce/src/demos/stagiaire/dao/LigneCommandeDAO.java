@@ -102,7 +102,7 @@ public class LigneCommandeDAO implements Dao<LigneCommande> {
 		Connection c = MyConnection.getConnection();
 		if (c != null) {
 			try {
-				PreparedStatement ps = c.prepareStatement("select * from ligneCommande inner join   commande where acheteurID =? ;");
+				PreparedStatement ps = c.prepareStatement("select * from ligneCommande inner join commande  on ligneCommande.commandeID = commande.commandeID where acheteurID =? ;");
 				ps.setInt(1, purchasser.getId());
 				ResultSet result = ps.executeQuery();
 				while (result.next()) {

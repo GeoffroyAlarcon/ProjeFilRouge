@@ -14,10 +14,6 @@ public class Panier {
 		return panierDao.save(lignePanier);
 	}
 
-	public void removeall(Purchasser purchasser) {
-		panierDao.removeAllProductInCart(purchasser);
-		panierProduitDao.removeAllProductInCart(purchasser);
-	}
 
 	public ArrayList<LigneCommandePanierProduit> findByPurchasser(Purchasser purchasser) {
 		return panierProduitDao.findByPurchasser(purchasser);

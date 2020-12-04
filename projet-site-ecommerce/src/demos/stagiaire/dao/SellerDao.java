@@ -29,9 +29,10 @@ public class SellerDao implements Dao<Seller> {
 					seller.setId(resultat.getInt(1));
 				}
 
-				ps = c.prepareStatement("insert into vendeur ( nomCompagnie,siret,utilisateurID,vendeurID)  value (?,?,?,?);",
+				ps = c.prepareStatement(
+						"insert into vendeur ( nomCompagnie,siret,utilisateurID,vendeurID)  value (?,?,?,?);",
 						PreparedStatement.RETURN_GENERATED_KEYS);
-				
+
 				ps.setString(1, seller.getNomCompagnie());
 				ps.setString(2, seller.getSiret());
 				ps.setInt(3, seller.getId());
@@ -77,7 +78,7 @@ public class SellerDao implements Dao<Seller> {
 
 				ResultSet result = ps.executeQuery();
 				if (result.next()) {
-			
+
 					String email = result.getString("email");
 					String password = result.getString("password");
 					String nomCompagnie = result.getString("nomCompagnie");

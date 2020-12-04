@@ -32,14 +32,16 @@
 					<h4 class="text-primary">
 						<c:out value="${ produit.designation}"></c:out>
 					</h4>
-					<img alt="" src="${produit.imageURL }">
+					<c:url var="pageProduit"
+						value="/pageProduit?idObject=${produit.id}"></c:url>
+					<a href="${pageProduit }"> <img alt=""
+						src="${produit.imageURL }">
+					</a>
 					<p>
 						prix :
 						<c:out value="${produit.prixUnitaire } euros"></c:out>
 					</p>
-					<c:url var="pageProduit"
-						value="/pageProduit?idObject=${produit.id}"></c:url>
-					<a href="${pageProduit }"> test </a>
+
 				</div>
 			</c:forEach>
 		</div>

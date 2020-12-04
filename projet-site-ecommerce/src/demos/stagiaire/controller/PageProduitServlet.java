@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.Remove;
+
+import demos.stagiaire.dao.PanierDao;
 import demos.stagiaire.dao.PanierProduitDao;
 import demos.stagiaire.dao.ProductDao;
 import demos.stagiaire.model.LigneCommande;
@@ -28,6 +31,7 @@ public class PageProduitServlet extends HttpServlet {
 	private PanierProduitDao panierProduitDao = new PanierProduitDao();
 	private ProductDao productDao = new ProductDao();
 	private Panier panier = new Panier();
+	PanierDao panierDao = new PanierDao();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -60,16 +64,13 @@ public class PageProduitServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		System.out.println(request.getAttribute("test"));
 		HttpSession session = request.getSession();
 		Product produit = (Product) session.getAttribute("produit");
-
 		int quantiteCommandee = Integer.parseInt(request.getParameter("quantite"));
 		LigneCommandePanierProduit ligneCommandePanierProduit = new LigneCommandePanierProduit(quantiteCommandee,
 				produit);
 		Purchasser acheteur = (Purchasser) session.getAttribute("acheteur");
-	
+
 		LignePanier lignePanier = new LignePanier(ligneCommandePanierProduit, acheteur);
 		if (produit.getQuantiteStock() < ligneCommandePanierProduit.getQuantiteCommandee()) {
 			System.err.println("la quantité commandée est suppérieure à la quantité en stock !");
@@ -77,11 +78,11 @@ public class PageProduitServlet extends HttpServlet {
 					response);
 
 		} else {
-if( panierProduitDao.)
+			panierDao.removeByPurchasserAndProduct(acheteur, produit);
 			panierProduitDao.save(ligneCommandePanierProduit);
 			panier.add(lignePanier);
-			response.sendRedirect("panier");
-		}
-	}
 
+		}
+		response.sendRedirect("panier");
+	}
 }

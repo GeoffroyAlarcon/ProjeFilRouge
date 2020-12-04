@@ -47,13 +47,15 @@
 				</div>
 				<div class="col-md-2 text-center">
 					<c:url var="deleteProduct"
-						value="/deleteCart?idObject=${produit.id}"></c:url>
+						value="/deleteCart?idObject=${produit.produit.id}"></c:url>
 					<a href="${deleteProduct}">
 						<button class="btn btn-primary" type="button">Supprimez
 							article</button>
 					</a>
-					<c:url var="UpdateCart" value="/updateCart?idObject=${produit.id}"></c:url>
-					<a href="${updateCart}">
+
+					<c:url var="pageProduit"
+						value="/pageProduit?idObject=${produit.produit.id}"></c:url>
+					<a href="${pageProduit }">
 						<button class="btn btn-primary" type="button">modifier
 							quantité</button>
 					</a>
